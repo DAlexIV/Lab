@@ -3,3 +3,6 @@ C:\Study\C#\Client\Client\bin\Debug\Client.exe
 C:\Study\C#\Client\Client\bin\Debug\Client.pdb
 C:\Study\C#\Client\Client\obj\Debug\Client.exe
 C:\Study\C#\Client\Client\obj\Debug\Client.pdb
+C:\Users\Artem\Documents\GitHub\Lab\Client\Client\bin\Debug\Client.exe.config
+C:\Users\Artem\Documents\GitHub\Lab\Client\Client\obj\Debug\Client.exe
+C:\Users\Artem\Documents\GitHub\Lab\Client\Client\obj\Debug\Client.pdb
