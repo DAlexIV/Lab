@@ -1,0 +1,6 @@
+C:\Study\C#\Serv\Serv\bin\Debug\Serv.exe.config
+C:\Study\C#\Serv\Serv\bin\Debug\Serv.exe
+C:\Study\C#\Serv\Serv\bin\Debug\Serv.pdb
+C:\Study\C#\Serv\Serv\obj\Debug\Serv.csprojResolveAssemblyReference.cache
+C:\Study\C#\Serv\Serv\obj\Debug\Serv.exe
+C:\Study\C#\Serv\Serv\obj\Debug\Serv.pdb
