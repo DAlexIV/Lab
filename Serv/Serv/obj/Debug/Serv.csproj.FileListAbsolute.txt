@@ -4,3 +4,6 @@ C:\Study\C#\Serv\Serv\bin\Debug\Serv.pdb
 C:\Study\C#\Serv\Serv\obj\Debug\Serv.csprojResolveAssemblyReference.cache
 C:\Study\C#\Serv\Serv\obj\Debug\Serv.exe
 C:\Study\C#\Serv\Serv\obj\Debug\Serv.pdb
+C:\Games\Lab\Lab\Serv\Serv\bin\Debug\Serv.exe.config
+C:\Games\Lab\Lab\Serv\Serv\obj\Debug\Serv.exe
+C:\Games\Lab\Lab\Serv\Serv\obj\Debug\Serv.pdb
