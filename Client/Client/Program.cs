@@ -22,7 +22,7 @@ public class UDPListener
             {
                 Console.WriteLine("Waiting for broadcast");
                 byte[] bytes = listener.Receive(ref groupEP);
-
+                
                 Console.WriteLine("Received broadcast from {0} :\n {1}\n",
                     groupEP.ToString(),
                     Encoding.ASCII.GetString(bytes, 0, bytes.Length));
