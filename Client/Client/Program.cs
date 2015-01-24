@@ -1,8 +1,8 @@
-﻿//azazazazazazazz
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 public class UDPListener
 {
@@ -41,8 +41,39 @@ public class UDPListener
 
     public static int Main()
     {
-        StartListener();
-
+        int state = 0; 
+        Console.CursorVisible = false;
+        Client.MapCl test = new Client.MapCl();
+        Client.PlayerCl pl = new Client.PlayerCl();
+        //StartListener();
+        Client.Interface.init();
+        while(true)
+        {
+            switch(state)
+            {
+                case 0:
+            Client.Interface.draw();
+            Client.Interface.controls(ref state);
+            break;
+                case 1:
+            test.generateCl_map();
+                    while(true)
+        {          
+            test.draw();
+            pl.controls(test);
+        }
+            break;
+            }
+        }
+        /*Client.MapCl test = new Client.MapCl();
+        Client.PlayerCl pl = new Client.PlayerCl();
+        test.generateCl_map();
+        while(true)
+        {          
+            test.draw();
+            pl.controls(test);
+        }*/
+        Console.ReadKey();
         return 0;
     }
 }
