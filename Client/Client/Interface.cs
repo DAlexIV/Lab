@@ -13,10 +13,10 @@ namespace Client
         static char[,] new_map = new char[3, 50];
      static public void init()
         {
-         string s="Сгенерировать карту";
+         string s="Generate map";
          for (int i = 0; i < s.Length; i++)
              new_map[0, 2 + i] = s[i];
-         s = "Продолжение следует...";
+         s = "To Be Continued..";
          for (int i = 0; i < s.Length; i++)
              new_map[2, 2 + i] = s[i];
          new_map[state,0]='-';
