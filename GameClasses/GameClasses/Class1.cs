@@ -9,23 +9,32 @@ namespace GameClasses
     
     public class Player
     {
-        int x;
-        int y;
-        char m;
-        string name;
+        protected int x;
+        protected int y;
+        protected char m;
+        protected string name;
     }
     public class Map
     {
-        static char defch = '#';
-        int[,] map = new int[30, 60];
+        static Random rand = new Random(); 
+        protected static char defch = '#';       
+        protected int[,] map = new int[20, 50];
 
         // Игроки имеют номера с -1 до -16 в карте
-        char[] players = new char[16];
-        string[] players = new string[16]; //Никнеймы игроков(чтобы показываться в где-нибудь)
+        protected char[] players = new char[16];
+       // protected string[] players = new string[16]; //Никнеймы игроков(чтобы показываться в где-нибудь)
 
         //Строка для уведомлений игроков, тоже должна показываться где-нибудь в течении какого-нибудь времени
         //В идеале это может быть даже некоторый набор строк, то есть будут показываться последние несколько
         //В случае отсутствия каких-либо действий равна null
-        string notif; 
+        protected string notif; 
+        public int[,] generate_map()
+        {
+            int[,] m=new int[20,50];
+            for (int i = 0; i < m.GetLength(0); i++)
+                for (int j = 0; j < m.GetLength(1); j++)
+                    m[i, j] = rand.Next(2);
+            return m;
+        }
     }
 }
