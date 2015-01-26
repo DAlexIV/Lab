@@ -10,7 +10,8 @@ namespace TmpServ
 {
     class Program
     {
-        static int listenPort = 11000;
+        static MapServ curm;
+        static int listenPort = 12000;
         static IPEndPoint ep;
         static Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         static UdpClient listener = new UdpClient(listenPort);
@@ -26,15 +27,33 @@ namespace TmpServ
             Console.WriteLine(groupEP.Address);
             return groupEP;
         }
-        void Sender(IPEndPoint curip)
+        static void Sender(IPEndPoint curip, MapServ cur)
         {
-
+            byte[] num = { (byte)curm.cur_players };
+            s.SendTo(num, curip);
+            s.SendTo(cur.EncodingIntArrToByteStream(), curip);
+            s.SendTo(cur.EncodingCharArrToByteStream(), curip);
+            s.SendTo(cur.EncodingStringToByteStream(curm.notif), curip);
+            byte[][] names = cur.EncodingArrStringToByteStream();
+            for (int i = 0; i < curm.cur_players; ++i)
+                s.SendTo(names[i], curip);
         }
         static void Main(string[] args)
         {
-            MapServ curm = new MapServ();
-            curm.GetMap = curm.generate_map();
+            curm = new MapServ();
             ep = Listener();
+            curm.GetMap = curm.generate_map();      
+      
+            //Fill
+            curm.cur_players = 2;
+            curm.players_names[0] = "Alex";
+            curm.players_names[1] = "Artyom";
+            curm.players_signs[0] = 'X';
+            curm.players_signs[1] = 'E';
+            curm.notif = "Let's go!";
+
+            Sender(ep, curm);
+            Console.WriteLine("Sent!");
         }
     }
 }

@@ -18,22 +18,22 @@ namespace GameClasses
     {
         static Random rand = new Random(); 
         protected static char defch = '#';
-        protected const int map_width = 50;
-        protected const int map_height = 20;
+        public const int map_width = 50;
+        public const int map_height = 20;
         protected const int max_players_num = 16;
 
-        protected int cur_players;
+        public int cur_players;
 
-        protected int[,] map = new int[map_height, map_width];
+        public int[,] map = new int[map_height, map_width];
 
         // Игроки имеют номера с -1 до -16 в карте
-        protected char[] players_signs = new char[max_players_num];
-        protected string[] players_names = new string[max_players_num]; //Никнеймы игроков(чтобы показываться в где-нибудь)
+        public char[] players_signs = new char[max_players_num];
+        public string[] players_names = new string[max_players_num]; //Никнеймы игроков(чтобы показываться в где-нибудь)
 
         //Строка для уведомлений игроков, тоже должна показываться где-нибудь в течении какого-нибудь времени
         //В идеале это может быть даже некоторый набор строк, то есть будут показываться последние несколько
         //В случае отсутствия каких-либо действий равна null
-        protected string notif; 
+        public string notif; 
         public int[,] generate_map()
         {
             int[,] m = new int[map_height, map_width];
@@ -41,7 +41,17 @@ namespace GameClasses
                 for (int j = 0; j < m.GetLength(1); j++)
                     m[i, j] = rand.Next(2);
             return m;
-        }       
-    }
+        }
+        public int[,] GetMap
+        {
+            get
+            {
+                return map;
+            }
+            set
+            {
+                map = value;
+            }
+        }
     }
 }
