@@ -8,7 +8,7 @@ namespace Client
 {
     public class MapCl:GameClasses.Map
     {
-        int[,] new_map = new int[20, 50];
+        int[,] new_map = new int[GameClasses.Map.map_height, GameClasses.Map.map_width];
         public void generateCl_map()
         {
             new_map = generate_map();
