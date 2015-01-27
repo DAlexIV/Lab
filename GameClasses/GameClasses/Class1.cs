@@ -36,10 +36,11 @@ namespace GameClasses
         public string notif; 
         public int[,] generate_map()
         {
+            Random gen = new Random();
             int[,] m = new int[map_height, map_width];
             for (int i = 0; i < m.GetLength(0); i++)
                 for (int j = 0; j < m.GetLength(1); j++)
-                    m[i, j] = rand.Next(2);
+                    m[i, j] = gen.Next(2);
             return m;
         }
         public int[,] GetMap
