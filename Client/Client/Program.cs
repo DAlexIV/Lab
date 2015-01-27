@@ -41,6 +41,8 @@ public class UDPListener
 
     public static int Main()
     {
+        Console.WindowHeight = 35;
+        Console.WindowWidth = 100;
         int state = 0; 
         Console.CursorVisible = false;
         Client.MapCl test = new Client.MapCl();
@@ -57,6 +59,7 @@ public class UDPListener
             break;
                 case 1:
             test.generateCl_map();
+            pl.gen_position(test);
                     while(true)
         {          
             test.draw();

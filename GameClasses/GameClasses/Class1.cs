@@ -18,7 +18,7 @@ namespace GameClasses
     {
         static Random rand = new Random(); 
         protected static char defch = '#';
-        public const int map_width = 50;
+        public const int map_width = 100;
         public const int map_height = 20;
         protected const int max_players_num = 16;
 
@@ -40,6 +40,9 @@ namespace GameClasses
             int[,] m = new int[map_height, map_width];
             for (int i = 0; i < m.GetLength(0); i++)
                 for (int j = 0; j < m.GetLength(1); j++)
+                    if ((i == 0) || (i == m.GetLength(0)-1) || (j == 0) || (j == m.GetLength(1)-1))
+                        m[i, j] = 1;
+                    else 
                     m[i, j] = gen.Next(2);
             return m;
         }

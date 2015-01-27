@@ -50,6 +50,6 @@ namespace Client
         public int[,] Map
         {
             get { return new_map; }
-        }       
+        }
     }
 }
