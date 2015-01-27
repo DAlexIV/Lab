@@ -18,7 +18,6 @@ namespace TmpServ
         static IPEndPoint Listener() //Sets connection up
         {
             IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
-            IPEndPoint tmp = new IPEndPoint(IPAddress.Any, IPEndPoint.MaxPort);
             Console.WriteLine("Waiting for broadcast");
             byte[] bytes = listener.Receive(ref groupEP);
             Console.WriteLine("Received broadcast from {0} :\n {1}\n",
