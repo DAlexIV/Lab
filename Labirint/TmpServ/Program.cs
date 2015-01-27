@@ -5,22 +5,25 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace TmpServ
 {
     class Program
     {
         static MapServ curm;
-        static int listenPort = 12000;
+        static int listenPort = 11000;
         static IPEndPoint ep;
         static Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         static UdpClient listener = new UdpClient(listenPort);
         static IPEndPoint Listener() //Sets connection up
         {
             IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
+            
             IPEndPoint tmp = new IPEndPoint(IPAddress.Any, IPEndPoint.MaxPort);
             Console.WriteLine("Waiting for broadcast");
             byte[] bytes = listener.Receive(ref groupEP);
+            groupEP.Port = 11000;
             Console.WriteLine("Received broadcast from {0} :\n {1}\n",
             groupEP.ToString(),
             Encoding.ASCII.GetString(bytes, 0, bytes.Length));
@@ -43,7 +46,7 @@ namespace TmpServ
             curm = new MapServ();
             ep = Listener();
             curm.GetMap = curm.generate_map();      
-      
+             
             //Fill
             curm.cur_players = 2;
             curm.players_names[0] = "Alex";
@@ -51,9 +54,10 @@ namespace TmpServ
             curm.players_signs[0] = 'X';
             curm.players_signs[1] = 'E';
             curm.notif = "Let's go!";
-
+            Thread.Sleep(2000);
             Sender(ep, curm);
             Console.WriteLine("Sent!");
+            Console.ReadKey();
         }
     }
 }
