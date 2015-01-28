@@ -9,10 +9,10 @@ namespace GameClasses
     
     public class Player
     {
-        protected int x;
-        protected int y;
-        protected char m;
-        protected string name;
+        public int x;
+        public int y;
+        public char m;
+        public string name;
     }
     public class Map
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    class PlayerCl:GameClasses.Player
+    public class PlayerCl:GameClasses.Player
     {
      public PlayerCl()
         {
@@ -65,7 +65,7 @@ namespace Client
                  }
                  break;
              case ConsoleKey.Q:
-                 Interface.state = 0;
+                 Client.GenInterCl.state = 0;
                  break;
          }
          map.Map[y, x] = -1;

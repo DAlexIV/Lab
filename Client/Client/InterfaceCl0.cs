@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    class Interface
+    public class InterfaceCl0
     {
+        static public bool ne=false;
         static public int state=0;
         static char[,] map = new char[3, 50];
         static char[,] new_map = new char[3, 50];
      static public void init()
         {
+            map = new char[3, 50]; ;
          string s="Generate map";
          for (int i = 0; i < s.Length; i++)
              new_map[0, 2 + i] = s[i];
@@ -24,18 +26,21 @@ namespace Client
         }
      static public void draw()
         {
+            if (ne == false)
+                init();
          for (int i = 0; i < map.GetLength(0); i++)
                     for (int j = 0; j < map.GetLength(1); j++)
                     {
                         if (new_map[i,j] != map[i, j])
                         {
+                            Console.ResetColor();
                             Console.SetCursorPosition(j, i);
                             Console.Write(new_map[i, j]);
                             map[i, j] = new_map[i, j];
                         }
                     }
         }
-     static public void controls(ref int st)
+     static public void controls()
      {
          switch (Console.ReadKey(true).Key)
          {
@@ -58,7 +63,8 @@ namespace Client
              case ConsoleKey.Enter:
                  if (state == 0)
                  {
-                     st = 1;
+                     GenInterCl.state = 1;
+                     ne = false;
                      Console.Clear();
                  }
                  break;
