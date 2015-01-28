@@ -64,6 +64,9 @@ namespace Client
                      x++;
                  }
                  break;
+             case ConsoleKey.Q:
+                 Interface.state = 0;
+                 break;
          }
          map.Map[y, x] = -1;
         }

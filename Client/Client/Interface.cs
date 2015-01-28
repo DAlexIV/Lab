@@ -8,7 +8,7 @@ namespace Client
 {
     class Interface
     {
-        static int state=0;
+        static public int state=0;
         static char[,] map = new char[3, 50];
         static char[,] new_map = new char[3, 50];
      static public void init()

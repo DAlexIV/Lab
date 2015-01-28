@@ -10,7 +10,7 @@ namespace TmpClient
     class Program
     {
         static MapCl curm = new MapCl();
-        static string servIP = "172.19.32.126";
+        static string servIP = "172.19.32.48";
         static int listenPort = 11000;
         static IPEndPoint ep;
         static bool is_input = false;

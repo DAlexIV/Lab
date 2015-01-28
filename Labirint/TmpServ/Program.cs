@@ -46,6 +46,12 @@ namespace TmpServ
         static void Main(string[] args)
         {
             curm = new MapServ();
+         /*   for (int i = 0; i < 10; i++)
+            {
+                byte[] a = { 0, 1, 1 };
+                s.SendTo(a, new IPEndPoint(IPAddress.Parse("172.19.32.48"), 11000));
+                Thread.Sleep(2000);
+            }*/
             ep = Listener();
             curm.GetMap = curm.generate_map();      
              
@@ -57,6 +63,7 @@ namespace TmpServ
             curm.players_signs[1] = 'E';
             curm.notif = "Let's go!";
             Thread.Sleep(2000);
+
             Sender(ep, curm);
             Console.WriteLine("Sent!");
             Console.ReadKey();

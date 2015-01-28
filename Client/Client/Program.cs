@@ -51,11 +51,11 @@ public class UDPListener
         Client.Interface.init();
         while(true)
         {
-            switch(state)
+            switch(Client.Interface.state)
             {
                 case 0:
             Client.Interface.draw();
-            Client.Interface.controls(ref state);
+            Client.Interface.controls(ref Client.Interface.state);
             break;
                 case 1:
             test.generateCl_map();

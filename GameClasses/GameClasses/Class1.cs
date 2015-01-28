@@ -18,7 +18,7 @@ namespace GameClasses
     {
         static Random rand = new Random(); 
         protected static char defch = '#';
-        public const int map_width = 100;
+        public const int map_width = 50;
         public const int map_height = 20;
         protected const int max_players_num = 16;
 

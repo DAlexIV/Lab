@@ -28,17 +28,17 @@ namespace Client
                             switch (new_map[i, j])
                             {
                                 case 0:
-                                    Console.SetCursorPosition(j, i);
+                                    Console.SetCursorPosition(j, i+2);
                                     Console.ResetColor();
                                     Console.Write(' ');
                                     break;
                                 case 1:
-                                    Console.SetCursorPosition(j, i);
+                                    Console.SetCursorPosition(j, i+2);
                                     Console.BackgroundColor = ConsoleColor.DarkGray;
                                     Console.Write(' ');
                                     break;
                                 case -1:
-                                    Console.SetCursorPosition(j, i);
+                                    Console.SetCursorPosition(j, i+2);
                                     Console.ResetColor();
                                     Console.Write('#');
                                     break;
