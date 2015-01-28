@@ -9,10 +9,66 @@ namespace GameClasses
     
     public class Player
     {
-        public int x;
-        public int y;
-        public char m;
-        public string name;
+        protected int x;
+        protected int y;
+        protected char m;
+        protected string name;
+        public int X
+        {
+            get
+            {
+                return x;
+            }
+            set
+            {
+                if (value >= 0 && value < Map.map_width)
+                    x = value;
+                else 
+                    throw new Exception("Player overrunning on x");
+            }
+        }
+        public int Y
+        {
+            get
+            {
+                return y;
+            }
+            set
+            {
+                if (value >= 0 && value < Map.map_height)
+                    y = value;
+                else 
+                    throw new Exception("Player overrunning on y");
+            }
+        }
+        public char M
+        {
+            get
+            {
+                return m;
+            }
+            set
+            {
+                if (value >= 21 && value <=126)
+                    x = value;
+                else 
+                    throw new Exception("Player sum is false");
+            }
+        }
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                if (value.Length <= 10)
+                    name = value;
+                throw new Exception("Player name is too long");
+            }
+        }
+
     }
     public class Map
     {
@@ -20,7 +76,7 @@ namespace GameClasses
         protected static char defch = '#';
         public const int map_width = 50;
         public const int map_height = 20;
-        protected const int max_players_num = 16;
+        public const int max_players_num = 16;
 
         public int cur_players;
 
@@ -54,7 +110,8 @@ namespace GameClasses
             }
             set
             {
-                map = value;
+                if (map.GetLength(0) == Map.map_height && map.GetLength(1) == Map.map_width) 
+                    map = value;
             }
         }
     }

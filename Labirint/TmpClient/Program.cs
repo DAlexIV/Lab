@@ -11,7 +11,7 @@ namespace TmpClient
     {
         static MapCl curm = new MapCl();
 
-        static string servIP = "172.19.32.48";
+        static string servIP = "172.19.33.191";
 
         static int listenPort = 11000;
         static Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -42,6 +42,7 @@ namespace TmpClient
             string[] ret = new string[curm.cur_players];
             for (int i = 0; i < curm.cur_players; ++i)
                 ret[i] = curm.ByteToString(Reciever());
+            curm.players_names = ret;
             return groupEP;
         }
         static void Main(string[] args)
