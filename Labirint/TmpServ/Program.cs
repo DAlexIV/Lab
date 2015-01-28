@@ -11,6 +11,7 @@ namespace TmpServ
 {
     class Program
     {
+        static List<PlayerServ> pls;
         static MapServ curm;
         static int listenPort = 11000;
         static IPEndPoint ep;
@@ -22,7 +23,13 @@ namespace TmpServ
 
             
             IPEndPoint tmp = new IPEndPoint(IPAddress.Any, IPEndPoint.MaxPort);
-
+            byte[] mestype = listener.Receive(ref groupEP); 
+            switch (mestype[0])
+            {
+                case 1:
+                    byte[] 
+                    AddNewPlayer(groupEP);
+            }
             Console.WriteLine("Waiting for broadcast");
             byte[] bytes = listener.Receive(ref groupEP);
             groupEP.Port = 11000;
@@ -32,21 +39,23 @@ namespace TmpServ
             Console.WriteLine(groupEP.Address);
             return groupEP;
         }
-        static void SendAll(cur)
+        static void SendAll(MapServ cur)
         {
-            for (int i = 0; i < )
+            for (int i = 0; i < pls.Count; ++i)
+                Sender(new IPEndPoint(IPAddress.Parse(pls[i].IP), 11000), cur);
+            Console.WriteLine("Sent to all");
         }
         static void Sender(IPEndPoint curip, MapServ cur)
         {
             byte[] num = { (byte)curm.cur_players };
             s.SendTo(num, curip);
             Thread.Sleep(5);
-            s.SendTo(cur.EncodingIntArrToByteStream(), curip);
+            s.SendTo(EncodingB.EncodingIntArrToByteStream(cur), curip);
             Thread.Sleep(5);
-            s.SendTo(cur.EncodingCharArrToByteStream(), curip);
+            s.SendTo(EncodingB.EncodingCharArrToByteStream(cur), curip);
             Thread.Sleep(5);
-            s.SendTo(cur.EncodingStringToByteStream(curm.notif), curip);
-            byte[][] names = cur.EncodingArrStringToByteStream();
+            s.SendTo(EncodingB.EncodingStringToByteStream(curm.notif), curip);
+            byte[][] names = EncodingB.EncodingArrStringToByteStream(cur);
             for (int i = 0; i < curm.cur_players; ++i)
                 s.SendTo(names[i], curip);
         }

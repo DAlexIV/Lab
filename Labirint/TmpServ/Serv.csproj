@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Encoding.cs" />
     <Compile Include="MapServ.cs" />
+    <Compile Include="PlayerServ.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
