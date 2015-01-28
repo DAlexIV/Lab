@@ -12,7 +12,7 @@ namespace TmpClient
         {
             for (int i = 0; i < map_height; ++i)
                 for (int k = 0; k < map_width; ++k)
-                    map[i, k] = mes[i * map_width + k];
+                    map[i, k] = mes[i * map_width + k] - 128;
         }
         public void ByteToCharArr(byte[] mes)
         {
