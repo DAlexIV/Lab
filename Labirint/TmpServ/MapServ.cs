@@ -8,6 +8,13 @@ namespace TmpServ
 {
     class MapServ : GameClasses.Map
     {
-        
+        static void GenerateMapNow(int step)
+        {
+
+        }
+        static void GenerateMapFromFile(string name)
+        {
+
+        }
     }
 }

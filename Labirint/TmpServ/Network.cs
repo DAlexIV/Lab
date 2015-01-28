@@ -21,7 +21,18 @@ namespace TmpServ
                     return i;
             return -1;
         }
-        static IPEndPoint Listener(MapServ cur) //Sets connection up
+        static void ConOut(byte[] bytes, IPEndPoint groupEP)
+        {
+            Console.WriteLine("Received broadcast from {0} :\n {1}\n",
+            groupEP.ToString(),
+            Encoding.ASCII.GetString(bytes, 0, bytes.Length));
+        }
+        void Listen()
+        {
+            while (Program.state != 2)
+                ListenStep(Program.curm);
+        }
+        static void ListenStep(MapServ cur) //Sets connection up
         {
             IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
 
@@ -30,41 +41,51 @@ namespace TmpServ
             byte[] mestype = listener.Receive(ref groupEP); 
             if (mestype.Length != 1)
                 throw new Exception("Mestype package fail");
+            ConOut(mestype, groupEP);
             switch (mestype[0])
             {
-                case 1:
+                case 1: //Add player
                     byte[] mes = listener.Receive(ref groupEP);
-                    if (mestype.Length != 3) 
+                    ConOut(mes, groupEP);
+                    if (mes.Length != 3) 
                         throw new Exception("New player package 1 fail");
                     byte[] strmes = listener.Receive(ref groupEP);
+                    ConOut(strmes, groupEP);
                     PlayerServ newpl = Decoding.BToPlayer(mes, strmes);
                     newpl.IP = groupEP;
                     pls.Add(Decoding.BToPlayer(mes, strmes));
-                    break;
-                case 2:
-                    byte[] mes = listener.Receive(ref groupEP); 
-                    if (mestype.Length != 2)
+                        break;
+                case 2: //Move player
+                    byte[] mes2 = listener.Receive(ref groupEP);
+                    ConOut(mes2, groupEP);
+                    if (mes2.Length != 2)
                         throw new Exception("Update package fail");
-                    if (FindIP(groupEP) == -1)
+                    int curpl = FindIP(groupEP);
+                    if (curpl == -1)
                         throw new Exception("UNKNOWN IP, WTF MAN???");
                     else
                     {
-                        
+                        pls[curpl].X = mes2[0];
+                        pls[curpl].Y = mes2[1];
                     }
+                    break;
+                case 255: //Delete player
+                    int curpl2 = FindIP(groupEP);
+                    if (curpl2 == -1)
+                        throw new Exception("UNKNOWN IP, WTF MAN???");
+                    else
+                        pls.RemoveAt(curpl2);
+                    break;
+                default:
+                    throw new Exception("Unknown type of package");
             }
-            Console.WriteLine("Waiting for broadcast");
-            byte[] bytes = listener.Receive(ref groupEP);
+            Program.isUpdated = true;
             groupEP.Port = 11000;
-            Console.WriteLine("Received broadcast from {0} :\n {1}\n",
-            groupEP.ToString(),
-            Encoding.ASCII.GetString(bytes, 0, bytes.Length));
-            Console.WriteLine(groupEP.Address); 
-            return groupEP;
         }
         static void SendAll(MapServ cur, List<PlayerServ> pls)
         {
             for (int i = 0; i < pls.Count; ++i)
-                Sender(new IPEndPoint(IPAddress.Parse(pls[i].IP), 11000), cur);
+                Sender(pls[i].IP, cur);
             Console.WriteLine("Sent to all");
         }
         static void Sender(IPEndPoint curip, MapServ cur)

@@ -8,10 +8,9 @@ namespace TmpServ
 {
     class Decoding
     {
-        internal PlayerServ BToPlayer(byte[] mes, byte[] strmes)
+        static internal PlayerServ BToPlayer(byte[] mes, byte[] strmes)
         {
-            return new PlayerServ(mes[0], mes[1], (char)mes[2], Encoding.ASCII.GetBytes(strmes));
-            
+            return new PlayerServ(mes[0], mes[1], (char)mes[2], Encoding.ASCII.GetString(strmes));
         }
     }
 }
