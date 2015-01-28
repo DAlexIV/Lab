@@ -13,6 +13,61 @@ namespace GameClasses
         protected int y;
         protected char m;
         protected string name;
+        public int X
+        {
+            get
+            {
+                return x;
+            }
+            set
+            {
+                if (value >= 0 && value < Map.map_width)
+                    x = value;
+                else 
+                    throw new Exception("Player overrunning on x");
+            }
+        }
+        public int Y
+        {
+            get
+            {
+                return y;
+            }
+            set
+            {
+                if (value >= 0 && value < Map.map_height)
+                    y = value;
+                else 
+                    throw new Exception("Player overrunning on y");
+            }
+        }
+        public char M
+        {
+            get
+            {
+                return m;
+            }
+            set
+            {
+                if (value >= 21 && value <=126)
+                    x = value;
+                else 
+                    throw new Exception("Player sum is false");
+            }
+        }
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                if (value.Length <= 10)
+                    name = value;
+                throw new Exception("Player name is too long");
+            }
+        }
     }
     public class Map
     {

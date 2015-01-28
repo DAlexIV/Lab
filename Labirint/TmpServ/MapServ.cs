@@ -9,8 +9,5 @@ namespace TmpServ
     class MapServ : GameClasses.Map
     {
         
-        
-        
-       
     }
 }

@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Decoding1.cs" />
     <Compile Include="Encoding.cs" />
     <Compile Include="MapServ.cs" />
+    <Compile Include="Network.cs" />
     <Compile Include="PlayerServ.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
