@@ -10,10 +10,10 @@ namespace TmpClient
     class Program
     {
         static MapCl curm = new MapCl();
+
         static string servIP = "172.19.32.48";
+
         static int listenPort = 11000;
-        static IPEndPoint ep;
-        static bool is_input = false;
         static Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         static UdpClient listener = new UdpClient(listenPort);
         static IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
@@ -47,7 +47,7 @@ namespace TmpClient
         static void Main(string[] args)
         {
             IPEndPoint serv = new IPEndPoint(IPAddress.Parse(servIP), 11000);
-            soc.SendTo(Encoding.ASCII.GetBytes(""), serv);
+            soc.SendTo(Encoding.ASCII.GetBytes("HI!"), serv);
             Console.WriteLine("IP sent");
             Listener();
             for (int i = 0; i < MapCl.map_height; ++i)
