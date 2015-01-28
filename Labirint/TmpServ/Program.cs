@@ -32,6 +32,10 @@ namespace TmpServ
             Console.WriteLine(groupEP.Address);
             return groupEP;
         }
+        static void SendAll(cur)
+        {
+            for (int i = 0; i < )
+        }
         static void Sender(IPEndPoint curip, MapServ cur)
         {
             byte[] num = { (byte)curm.cur_players };
