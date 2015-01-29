@@ -23,7 +23,10 @@ namespace Client
                                 break;
                             case 1:
                                 Console.SetCursorPosition(j, i + 2);
-                                Console.BackgroundColor = ConsoleColor.DarkGray;
+                                if ((i == 0) || (i == map.Map.GetLength(0) - 1) || (j == 0) || (j == map.Map.GetLength(1) - 1))
+                                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                                else
+                                    Console.BackgroundColor = ConsoleColor.Gray;
                                 Console.Write(' ');
                                 break;
                             case -1:
@@ -40,39 +43,43 @@ namespace Client
             switch (Console.ReadKey(true).Key)
             {
                 case ConsoleKey.S:
-                    if (map.Map[player.y + 1, player.x] == 0)
+                    if (map.Map[player.Y + 1, player.X] == 0)
                     {
-                        map.Map[player.y, player.x] = 0;
-                        player.y++;
+                        map.Map[player.Y, player.X] = 0;
+                        player.Y++;
                     }
                     break;
                 case ConsoleKey.A:
-                    if (map.Map[player.y, player.x - 1] == 0)
+                    if (map.Map[player.Y, player.X - 1] == 0)
                     {
-                        map.Map[player.y, player.x] = 0;
-                        player.x--;
+                        map.Map[player.Y, player.X] = 0;
+                        player.X--;
                     }
                     break;
                 case ConsoleKey.W:
-                    if (map.Map[player.y - 1, player.x] == 0)
+                    if (map.Map[player.Y - 1, player.X] == 0)
                     {
-                        map.Map[player.y, player.x] = 0;
-                        player.y--;
+                        map.Map[player.Y, player.X] = 0;
+                        player.Y--;
                     }
                     break;
                 case ConsoleKey.D:
-                    if (map.Map[player.y, player.x + 1] == 0)
+                    if (map.Map[player.Y, player.X + 1] == 0)
                     {
-                        map.Map[player.y, player.x] = 0;
-                        player.x++;
+                        map.Map[player.Y, player.X] = 0;
+                        player.X++;
                     }
                     break;
                 case ConsoleKey.Q:
+                    Console.ResetColor();
                     Client.GenInterCl.state = 0;
                     Console.Clear();
-                    break;
+                    for (int i = 0; i < map.map.GetLength(0); i++)
+                        for (int j = 0; j < map.map.GetLength(1); j++)
+                            map.map[i, j] = 0;
+                        break;
             }
-            map.Map[player.y, player.x] = -1;
+            map.Map[player.Y, player.X] = -1;
         }
     }
 }

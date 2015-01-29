@@ -14,7 +14,7 @@ namespace Client
         static char[,] new_map = new char[3, 50];
      static public void init()
         {
-            map = new char[3, 50]; ;
+            map = new char[3, 50]; 
          string s="Generate map";
          for (int i = 0; i < s.Length; i++)
              new_map[0, 2 + i] = s[i];
@@ -26,6 +26,7 @@ namespace Client
         }
      static public void draw()
         {
+            Console.ResetColor();
             if (ne == false)
                 init();
          for (int i = 0; i < map.GetLength(0); i++)
@@ -33,7 +34,6 @@ namespace Client
                     {
                         if (new_map[i,j] != map[i, j])
                         {
-                            Console.ResetColor();
                             Console.SetCursorPosition(j, i);
                             Console.Write(new_map[i, j]);
                             map[i, j] = new_map[i, j];
@@ -64,7 +64,7 @@ namespace Client
                  if (state == 0)
                  {
                      GenInterCl.state = 1;
-                     ne = false;
+                     map = new char[3, 50];
                      Console.Clear();
                  }
                  break;

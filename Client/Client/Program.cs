@@ -14,6 +14,7 @@ public class UDPListener
     {
         Console.WindowHeight = 35;
         Console.WindowWidth = 100;
+        Console.CursorVisible = false;
         Client.InterfaceCl0.init();
         while (true)
         {
