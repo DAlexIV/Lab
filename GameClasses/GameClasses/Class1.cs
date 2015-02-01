@@ -116,8 +116,24 @@ namespace GameClasses
             }
             set
             {
-                if (map.GetLength(0) == Map.map_height && map.GetLength(1) == Map.map_width) 
+                if (map.GetLength(0) == Map.map_height && map.GetLength(1) == Map.map_width)
                     map = value;
+                else
+                    throw new Exception("Wrong map size!");
+            }
+        }
+        public int this[int i, int j]
+        {
+            get
+            {
+                return map[i, j];
+            }
+            set
+            {
+                if (value < 2)
+                    map[i, j] = value;
+                else
+                    throw new Exception("Wrong map value");
             }
         }
     }
