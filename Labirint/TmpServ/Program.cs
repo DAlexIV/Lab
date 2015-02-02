@@ -37,7 +37,7 @@ namespace TmpServ
             curm.notif = "Let's go!";
             Thread.Sleep(2000);
 
-            Sender(ep, curm);
+            Netw.Sender(ep, curm);
             Console.WriteLine("Sent!");
             Console.ReadKey();
         }

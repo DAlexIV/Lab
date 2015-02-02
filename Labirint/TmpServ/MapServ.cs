@@ -10,7 +10,7 @@ namespace TmpServ
     {
         static void GenerateMapNow(int step)
         {
-
+            
         }
         static void GenerateMapFromFile(string name)
         {

@@ -41,7 +41,7 @@ namespace TmpServ
             groupEP.ToString(),
             Encoding.ASCII.GetString(bytes, 0, bytes.Length));
         }
-        void Listen()
+        public void Listen()
         {
             while (Program.state != 2)
                 ListenStep(Program.curm);
@@ -126,7 +126,7 @@ namespace TmpServ
                 Sender(pls[i].IP, cur);
             Console.WriteLine("Sent to all");
         }
-        static void Sender(IPEndPoint curip, MapServ cur)
+        static public void Sender(IPEndPoint curip, MapServ cur)
         {
             cur.cur_players = pls.Count();
             for (int i = 0; i < pls.Count(); ++i)
