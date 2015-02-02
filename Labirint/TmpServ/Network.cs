@@ -78,7 +78,7 @@ namespace TmpServ
                     else
                     {
                         cur[pls[curpl].X, pls[curpl].Y] = 0; //Delete old player
-                        if (pls[curpl].X > 0 && pls[curpl].X < cur.map_width)
+                        if (pls[curpl].X > 0 && pls[curpl].X < MapServ.map_width)
                         pls[curpl].X = mes2[0];
                         pls[curpl].Y = mes2[1];
                         cur[pls[curpl].X, pls[curpl].Y] = pls[curpl].M; //Make new player

@@ -25,7 +25,7 @@ namespace TmpServ
             Console.WriteLine("Type \"gennow N\" to generate map with roughly N/2 empty spaces");
             Console.WriteLine("Type \"load *.txt\" to load map from file");
             string comm = Console.ReadLine();
-            ep = Netw.Listener();
+            
             curm.GetMap = curm.generate_map();      
              
             //Fill

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TmpServ
 {
-    class MapServ : GameClasses.Map
+    public class MapServ : GameClasses.Map
     {
         static void GenerateMapNow(int step)
         {
