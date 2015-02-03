@@ -45,6 +45,7 @@
     <Compile Include="InterfaceCl0.cs" />
     <Compile Include="InterMapCl1.cs" />
     <Compile Include="MapCl.cs" />
+    <Compile Include="Netw.cs" />
     <Compile Include="PlayerCl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -10,7 +10,7 @@ namespace TmpServ
     public class MapServ : GameClasses.Map
     {
         
-        static void GenerateMapNow(int step)
+        public void GenerateMapNow(int step)
         {
             
         }

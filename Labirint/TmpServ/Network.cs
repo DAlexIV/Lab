@@ -10,6 +10,7 @@ namespace TmpServ
 {
     class Netw
     {
+        static bool just_started = true;
         static List<PlayerServ> pls;
         static List<int> isConnected_old;
         static List<int> isConnected;
@@ -17,15 +18,20 @@ namespace TmpServ
         static Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         static UdpClient listener = new UdpClient(listenPort);
         
-        static void Checker()
+        static void Checker(object state)
         {
-            for (int i = 0; i < isConnected.Count(); ++i)
+            if (!just_started)
             {
-                if (isConnected[i] != isConnected_old[i])
+                for (int i = 0; i < isConnected.Count(); ++i)
                 {
-                    DeletePlayer(i);
+                    if (isConnected[i] != isConnected_old[i])
+                    {
+                        isConnected = isConnected_old;
+
+                    }
+                    else
+                        DeletePlayer(i);
                 }
-                isConnected = isConnected_old;
             }
         }
         static int FindIP(IPEndPoint ip)
@@ -41,18 +47,28 @@ namespace TmpServ
             groupEP.ToString(),
             Encoding.ASCII.GetString(bytes, 0, bytes.Length));
         }
-        public void Listen()
+        static public void Listen()
         {
+            Timer isConn = new Timer(new TimerCallback(Checker), new object(), 0, 5000);
             while (Program.state != 2)
+            {
                 ListenStep(Program.curm);
+                if (!just_started)
+                    just_started = false;
+            }
+            isConn.Dispose();
+            SendEndingMessageToAll();
+
         }
         static void ListenStep(MapServ cur) //Sets connection up
         {
             IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
-
+            
             
             IPEndPoint tmp = new IPEndPoint(IPAddress.Any, IPEndPoint.MaxPort);
-            byte[] mestype = listener.Receive(ref groupEP); 
+            Console.WriteLine("Server is running");
+            byte[] mestype = listener.Receive(ref groupEP);
+            Console.WriteLine("Recieved smt");
             if (mestype.Length != 1)
                 throw new Exception("Mestype package fail");
             ConOut(mestype, groupEP);
@@ -73,6 +89,7 @@ namespace TmpServ
                     if (mes2.Length != 2)
                         throw new Exception("Update package fail");
                     int curpl = FindIP(groupEP);
+                    groupEP.Port = 11000;
                     if (curpl == -1)
                         throw new Exception("UNKNOWN IP, WTF MAN???");
                     else
@@ -82,19 +99,12 @@ namespace TmpServ
                         pls[curpl].X = mes2[0];
                         pls[curpl].Y = mes2[1];
                         cur[pls[curpl].X, pls[curpl].Y] = pls[curpl].M; //Make new player
-                    }
-                    break;
-                case 100:
-                    int fndpl = FindIP(groupEP);
-                    if (fndpl == -1)
-                        throw new Exception("UNKNOWN IP, WTF MAN???");
-                    else
-                    {
-                        isConnected[fndpl]++;
+                        ++isConnected[curpl];
                     }
                     break;
                 case 255: //Delete player
                     int curpl2 = FindIP(groupEP);
+                    groupEP.Port = 11000;
                     if (curpl2 == -1)
                         throw new Exception("UNKNOWN IP, WTF MAN???");
                     else DeletePlayer(curpl2);
@@ -109,6 +119,7 @@ namespace TmpServ
         {
             PlayerServ newpl = Decoding.BToPlayer(mes, strmes);
             newpl.IP = groupEP;
+            groupEP.Port = 11000;
             pls.Add(Decoding.BToPlayer(mes, strmes));
             isConnected.Add(0);
             isConnected_old.Add(0);
@@ -146,6 +157,16 @@ namespace TmpServ
             byte[][] names = EncodingB.EncodingArrStringToByteStream(cur);
             for (int i = 0; i < cur.cur_players; ++i)
                 s.SendTo(names[i], curip);
+        }
+        static private void SendEndingMessageToAll()
+        {
+            for (int i = 0; i < pls.Count(); ++i)
+                SendEndingMessage(pls[i].IP);
+        }
+        static private void SendEndingMessage(IPEndPoint curip)
+        {
+            byte[] tmp = {255};
+            s.SendTo(tmp, curip);
         }
     }
 }
