@@ -68,7 +68,7 @@ namespace Client
         private static void Listener()
         {
             Console.WriteLine("Waiting for broadcast");
-            StreamWriter str = File.AppendText("C:\\Games\\Lab\\Lab\\Client\\Client\\new.txt");
+            StreamWriter str = File.AppendText("C:\\Users\\Artem\\Documents\\newtesting.txt");
             using (str)
             {
                 str.WriteLine("Waiting for broadcast");
@@ -76,25 +76,39 @@ namespace Client
                // System.Environment.Exit(0);
                 byte[] tmp = Reciever();
                 Console.WriteLine(tmp.Length);
-                str.WriteLine(tmp.Length);
+                using (str)
+                {
+                    str.WriteLine(tmp.Length);
+                }
                 UDPListener.Map.cur_players = (int)tmp[0];
                 if (UDPListener.Map.cur_players != 255)
                 {
                     UDPListener.Map.ByteToMap(Reciever());
                     Console.WriteLine("Recieved Map");
-                    str.WriteLine("Recieved Map");
+                    using (str)
+                    {
+                        str.WriteLine("Recieved Map");
+                    }
                     UDPListener.Map.ByteToCharArr(Reciever());
                     Console.WriteLine("Recieved char arr");
-                    str.WriteLine("Recieved char arr");
+                    using (str)
+                    {
+                        str.WriteLine("Recieved char arr");
+                    }
                     UDPListener.Map.notif = UDPListener.Map.ByteToString(Reciever());
                     Console.WriteLine("Recieved notif");
-                    str.WriteLine("Recieved notif");
-
+                    using (str)
+                    {
+                        str.WriteLine("Recieved notif");
+                    }
                     string[] ret = new string[UDPListener.Map.cur_players];
                     for (int i = 0; i < UDPListener.Map.cur_players; ++i)
                         ret[i] = UDPListener.Map.ByteToString(Reciever());
                     Console.WriteLine("Recieved names");
-                    str.WriteLine("Recieved names");
+                    using (str)
+                    {
+                        str.WriteLine("Recieved names");
+                    }
                     UDPListener.Map.players_names = ret;
                    // str.Close();
                 }

@@ -27,3 +27,11 @@ C:\Users\Artem\Documents\GitHub\Lab\Lab\Client\Client\bin\Debug\Client.pdb
 C:\Users\Artem\Documents\GitHub\Lab\Lab\Client\Client\bin\Debug\GameClasses.dll
 C:\Users\Artem\Documents\GitHub\Lab\Lab\Client\Client\bin\Debug\GameClasses.pdb
 C:\Users\Artem\Documents\GitHub\Lab\Lab\Client\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\Artem\Documents\GitHub\Lab\Lab\Lab\Client\Client\bin\Debug\Client.exe.config
+C:\Users\Artem\Documents\GitHub\Lab\Lab\Lab\Client\Client\obj\Debug\Client.exe
+C:\Users\Artem\Documents\GitHub\Lab\Lab\Lab\Client\Client\obj\Debug\Client.pdb
+C:\Users\Artem\Documents\GitHub\Lab\Lab\Lab\Client\Client\bin\Debug\Client.exe
+C:\Users\Artem\Documents\GitHub\Lab\Lab\Lab\Client\Client\bin\Debug\Client.pdb
+C:\Users\Artem\Documents\GitHub\Lab\Lab\Lab\Client\Client\bin\Debug\GameClasses.dll
+C:\Users\Artem\Documents\GitHub\Lab\Lab\Lab\Client\Client\bin\Debug\GameClasses.pdb
+C:\Users\Artem\Documents\GitHub\Lab\Lab\Lab\Client\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
