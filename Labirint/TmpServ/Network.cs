@@ -11,9 +11,9 @@ namespace TmpServ
     class Netw
     {
         static bool just_started = true;
-        static List<PlayerServ> pls;
-        static List<int> isConnected_old;
-        static List<int> isConnected;
+        static List<PlayerServ> pls = new List<PlayerServ>();
+        static List<int> isConnected_old = new List<int>();
+        static List<int> isConnected = new List<int>();
         static int listenPort = 11000;
         static Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         static UdpClient listener = new UdpClient(listenPort);
@@ -118,9 +118,9 @@ namespace TmpServ
         private static void AddPlayer(IPEndPoint groupEP, byte[] mes, byte[] strmes)
         {
             PlayerServ newpl = Decoding.BToPlayer(mes, strmes);
-            newpl.IP = groupEP;
             groupEP.Port = listenPort;
-            pls.Add(Decoding.BToPlayer(mes, strmes));
+            newpl.IP = groupEP;            
+            pls.Add(newpl);
             isConnected.Add(0);
             isConnected_old.Add(0);
             }
