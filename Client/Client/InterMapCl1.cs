@@ -80,6 +80,7 @@ namespace Client
                         break;
             }
             map.Map[player.Y, player.X] = -1;
+            Netw.Send_Coords(player);
         }
     }
 }

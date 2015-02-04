@@ -70,7 +70,6 @@ namespace Client
                     break;
             }
             map.Map[y, x] = -1;
-            Netw.Send_Coords(this);
         }
     }
 }

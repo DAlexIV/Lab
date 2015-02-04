@@ -68,7 +68,8 @@ namespace Client
         private static void Listener()
         {
             Console.WriteLine("Waiting for broadcast");
-            StreamWriter str = File.AppendText("C:\\Users\\Artem\\Documents\\newtesting.txt");
+            StreamWriter str = File.AppendText("C:\\Temp\\tmp.txt");
+            //StreamWriter str = File.AppendText("C:\\Users\\Artem\\Documents\\newtesting.txt");
             using (str)
             {
                 str.WriteLine("Waiting for broadcast");
