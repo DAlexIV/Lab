@@ -26,7 +26,7 @@ namespace TmpServ
                 {
                     if (isConnected[i] != isConnected_old[i])
                     {
-                        isConnected = isConnected_old;
+                        isConnected[i] = isConnected_old[i];
 
                     }
                     else

@@ -40,10 +40,11 @@ namespace TmpServ
             Thread net_th = new Thread(Netw.Listen);
             net_th.Start();
             while (Console.ReadLine() != "Stop");
-            state = 2;           
-            
+            state = 2;
             Console.WriteLine("End");
-            Console.ReadKey();
+            Thread.Sleep(100);
+            net_th.Abort();
+            System.Environment.Exit(0);
         }
     }
 }
