@@ -19,8 +19,13 @@ namespace Client
             Console.CursorVisible = false;
 
             //Temporary block of code (just for testing)
+
+            //Reading player id
+            
             Console.WriteLine("Enter IP: ");
-            Netw.servIP = Console.ReadLine();
+            string line = Console.ReadLine();
+            Client.Netw.Set_Serv_Ip(ref line);
+            /*
             Console.WriteLine("Enter player name: ");
             Player.Name = Console.ReadLine();
             Console.WriteLine("Enter player sign: ");
@@ -29,7 +34,13 @@ namespace Client
             string tmpline = Console.ReadLine();
             Player.X = int.Parse(tmpline.Split()[0]);
             Player.Y = int.Parse(tmpline.Split()[1]);
+            */
+            Player.Name = "Alex";
+            Netw.Send_Token(Player); //Send player id
             //End of temp code
+            Thread list_thread = new Thread(Netw.Listen); //Start listening
+            
+            list_thread.Start();
 
             Client.InterfaceCl0.init();
             while (true)

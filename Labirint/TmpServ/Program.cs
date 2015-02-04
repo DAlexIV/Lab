@@ -22,7 +22,7 @@ namespace TmpServ
         static void Main(string[] args)
         {
             curm = new MapServ();
-            /* Map Loading
+            //Map Loading
             Console.WriteLine("Type \"gennow N\" to generate map with roughly N/2 empty spaces");
             Console.WriteLine("Type \"load *.txt\" to load map from file");
             string comm = Console.ReadLine();
@@ -33,7 +33,7 @@ namespace TmpServ
                     curm.GenerateMapFromFile(comm.Split()[1]);
                 else
                     throw new Exception("Fuck u anyway!");
-             */
+             
             state = 1;
             Thread net_th = new Thread(Netw.Listen);
             net_th.Start();

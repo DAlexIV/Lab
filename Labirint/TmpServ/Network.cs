@@ -89,7 +89,7 @@ namespace TmpServ
                     if (mes2.Length != 2)
                         throw new Exception("Update package fail");
                     int curpl = FindIP(groupEP);
-                    groupEP.Port = 11000;
+                    groupEP.Port = listenPort;
                     if (curpl == -1)
                         throw new Exception("UNKNOWN IP, WTF MAN???");
                     else
@@ -104,7 +104,7 @@ namespace TmpServ
                     break;
                 case 255: //Delete player
                     int curpl2 = FindIP(groupEP);
-                    groupEP.Port = 11000;
+                    groupEP.Port = listenPort;
                     if (curpl2 == -1)
                         throw new Exception("UNKNOWN IP, WTF MAN???");
                     else DeletePlayer(curpl2);
@@ -119,7 +119,7 @@ namespace TmpServ
         {
             PlayerServ newpl = Decoding.BToPlayer(mes, strmes);
             newpl.IP = groupEP;
-            groupEP.Port = 11000;
+            groupEP.Port = listenPort;
             pls.Add(Decoding.BToPlayer(mes, strmes));
             isConnected.Add(0);
             isConnected_old.Add(0);

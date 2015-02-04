@@ -65,7 +65,8 @@ namespace GameClasses
             {
                 if (value.Length <= 10)
                     name = value;
-                throw new Exception("Player name is too long");
+                else 
+                    throw new Exception("Player name is too long");
             }
         }
 

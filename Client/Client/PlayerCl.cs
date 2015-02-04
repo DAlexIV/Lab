@@ -66,9 +66,11 @@ namespace Client
                     break;
                 case ConsoleKey.Q:
                     Client.GenInterCl.state = 0;
+                    Netw.Send_ExitMes();
                     break;
             }
             map.Map[y, x] = -1;
+            Netw.Send_Coords(this);
         }
     }
 }
