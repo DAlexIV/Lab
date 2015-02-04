@@ -30,6 +30,7 @@ namespace Client
         {
             byte[] reg = { 2 };
             byte[] coords = { (byte)pl.X, (byte)pl.Y };
+            soc.SendTo(reg, servIP);
             soc.SendTo(coords, servIP);
         }
         public static void Send_Token(PlayerCl pl) //Отсылает класс Player в начале игры
