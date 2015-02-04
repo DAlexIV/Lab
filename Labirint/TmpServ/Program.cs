@@ -25,7 +25,9 @@ namespace TmpServ
             //Map Loading
             Console.WriteLine("Type \"gennow N\" to generate map with roughly N/2 empty spaces");
             Console.WriteLine("Type \"load *.txt\" to load map from file");
-            string comm = Console.ReadLine();
+            string comm = "C:\\Games\\Lab\\Lab\\Serv\\Serv\\tmp.txt";
+            curm.GenerateMapFromFile(comm);
+            /*
             if (comm.Split()[0] == "gennow")
                 curm.GenerateMapNow(int.Parse(comm.Split()[1]));
             else
@@ -33,7 +35,7 @@ namespace TmpServ
                     curm.GenerateMapFromFile(comm.Split()[1]);
                 else
                     throw new Exception("Fuck u anyway!");
-             
+             */
             state = 1;
             Thread net_th = new Thread(Netw.Listen);
             net_th.Start();
