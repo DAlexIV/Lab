@@ -85,11 +85,12 @@ namespace TmpServ
                         break;
                 case 2: //Move player
                     byte[] mes2 = listener.Receive(ref groupEP);
+                    groupEP.Port = listenPort;
                     ConOut(mes2, groupEP);
                     if (mes2.Length != 2)
                         throw new Exception("Update package fail");
                     int curpl = FindIP(groupEP);
-                    groupEP.Port = listenPort;
+                    
                     if (curpl == -1)
                         throw new Exception("UNKNOWN IP, WTF MAN???");
                     else
