@@ -32,44 +32,5 @@ namespace Client
             x = matr[1, p];
             map.Map[y, x] = -1;
         }
-        public void controls(MapCl map)
-        {
-            switch (Console.ReadKey(true).Key)
-            {
-                case ConsoleKey.S:
-                    if (map.Map[y + 1, x] == 0)
-                    {
-                        map.Map[y, x] = 0;
-                        y++;
-                    }
-                    break;
-                case ConsoleKey.A:
-                    if (map.Map[y, x - 1] == 0)
-                    {
-                        map.Map[y, x] = 0;
-                        x--;
-                    }
-                    break;
-                case ConsoleKey.W:
-                    if (map.Map[y - 1, x] == 0)
-                    {
-                        map.Map[y, x] = 0;
-                        y--;
-                    }
-                    break;
-                case ConsoleKey.D:
-                    if (map.Map[y, x + 1] == 0)
-                    {
-                        map.Map[y, x] = 0;
-                        x++;
-                    }
-                    break;
-                case ConsoleKey.Q:
-                    Client.GenInterCl.state = 0;
-                    Netw.Send_ExitMes();
-                    break;
-            }
-            map.Map[y, x] = -1;
-        }
     }
 }

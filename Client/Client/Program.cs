@@ -11,6 +11,7 @@ namespace Client
         public static Client.MapCl Map = new Client.MapCl();
         public static Client.PlayerCl Player = new Client.PlayerCl();
         private const int listenPort = 2500;
+        static public Netw cur_netw;
 
         public static int Main()
         {
@@ -21,10 +22,10 @@ namespace Client
             //Temporary block of code (just for testing)
 
             //Reading player id
-            
+            cur_netw = new Netw(listenPort);
             Console.WriteLine("Enter IP: ");
             string line = Console.ReadLine();
-            Client.Netw.Set_Serv_Ip(ref line);
+            cur_netw.Set_Serv_Ip(ref line);
             /*
             Console.WriteLine("Enter player name: ");
             Player.Name = Console.ReadLine();
@@ -36,9 +37,9 @@ namespace Client
             Player.Y = int.Parse(tmpline.Split()[1]);
             */
             Player.Name = "Alex";
-            Netw.Send_Token(Player); //Send player id
+            cur_netw.Send_Token(Player); //Send player id
             //End of temp code
-            Thread list_thread = new Thread(Netw.Listen); //Start listening
+            Thread list_thread = new Thread(cur_netw.Listen); //Start listening
             
             list_thread.Start();
 

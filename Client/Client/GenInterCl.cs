@@ -22,7 +22,7 @@ namespace Client
                     state = 2;
                     break;
                 case 2:
-                    Client.InterMapCl1.control(UDPListener.Map,UDPListener.Player);
+                    Client.InterMapCl1.control(UDPListener.Map,UDPListener.Player, UDPListener.cur_netw);
                     break;
             }
         }

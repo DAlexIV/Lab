@@ -38,35 +38,31 @@ namespace Client
                     map.map[i, j] = map.Map[i, j];
                 }
         }
-        public static void control(MapCl map,PlayerCl player)
+        public static void control(MapCl map,PlayerCl player, Netw cn)
         {
             switch (Console.ReadKey(true).Key)
             {
                 case ConsoleKey.S:
                     if (map.Map[player.Y + 1, player.X] == 0)
                     {
-                        map.Map[player.Y, player.X] = 0;
                         player.Y++;
                     }
                     break;
                 case ConsoleKey.A:
                     if (map.Map[player.Y, player.X - 1] == 0)
                     {
-                        map.Map[player.Y, player.X] = 0;
                         player.X--;
                     }
                     break;
                 case ConsoleKey.W:
                     if (map.Map[player.Y - 1, player.X] == 0)
                     {
-                        map.Map[player.Y, player.X] = 0;
                         player.Y--;
                     }
                     break;
                 case ConsoleKey.D:
                     if (map.Map[player.Y, player.X + 1] == 0)
                     {
-                        map.Map[player.Y, player.X] = 0;
                         player.X++;
                     }
                     break;
@@ -80,7 +76,7 @@ namespace Client
                         break;
             }
             map.Map[player.Y, player.X] = -1;
-            Netw.Send_Coords(player);
+            cn.Send_Coords(player);
         }
     }
 }

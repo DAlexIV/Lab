@@ -13,20 +13,27 @@ namespace Client
     public class Netw
     {
         
-        static bool isEndPack = false;
-        public static IPEndPoint servIP = new IPEndPoint(IPAddress.Any, listenPort);
-        //static System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Public\TestFolder\WriteLines2.txt", true);
-        static int listenPort = 2500;
-        static Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-        static UdpClient listener = new UdpClient(listenPort);
-        static IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
-        static IPEndPoint tmp = new IPEndPoint(IPAddress.Any, IPEndPoint.MaxPort);
-        public static void Set_Serv_Ip(ref string line) //Устанавливает IP сервера
+        bool isEndPack = false;
+        public IPEndPoint servIP ;
+        //  System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Public\TestFolder\WriteLines2.txt", true);
+        int listenPort = 2500;
+        Socket soc;
+        UdpClient listener;
+        IPEndPoint groupEP;
+        public Netw(int port)
+        {
+            this.listenPort = port;
+            servIP = new IPEndPoint(IPAddress.Any, listenPort);
+            soc = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            listener = new UdpClient(listenPort);
+            groupEP = new IPEndPoint(IPAddress.Any, listenPort);
+        }
+        public void Set_Serv_Ip(ref string line) //Устанавливает IP сервера
         {
             servIP.Address = IPAddress.Parse(line);
             servIP.Port = listenPort;
         }
-        public static void Send_Coords(PlayerCl pl) //Отсылает координаты
+        public void Send_Coords(PlayerCl pl) //Отсылает координаты
         {
             byte[] reg = { 2 };
             byte[] coords = { (byte)pl.X, (byte)pl.Y };
@@ -34,7 +41,7 @@ namespace Client
             Thread.Sleep(1);
             soc.SendTo(coords, servIP);
         }
-        public static void Send_Token(PlayerCl pl) //Отсылает класс Player в начале игры
+        public void Send_Token(PlayerCl pl) //Отсылает класс Player в начале игры
         {
             byte[] reg = { 1 };
             byte[] coords = {(byte)pl.X, (byte)pl.Y, (byte)(pl.M)};
@@ -45,12 +52,12 @@ namespace Client
             Thread.Sleep(5);
             soc.SendTo(Encoding.ASCII.GetBytes(pl.Name), servIP);
         }
-        public static void Send_ExitMes() //Отсылает сообщение о выходе
+        public void Send_ExitMes() //Отсылает сообщение о выходе
         {
             byte[] mes = {255};
             soc.SendTo(mes, servIP);
         }
-        private static byte[] Reciever()
+        private byte[] Reciever()
         {
             Console.WriteLine("Listening" + groupEP.ToString());
             byte[] bytes = listener.Receive(ref groupEP);
@@ -60,7 +67,7 @@ namespace Client
             Console.WriteLine(groupEP.Address);
             return bytes;
         }
-        public static void Listen()
+        public void Listen()
         {
             //file = 
             while (!isEndPack)
@@ -68,7 +75,7 @@ namespace Client
                 Listener();
             }
         }
-        private static void Listener()
+        private void Listener()
         {
             Console.WriteLine("Waiting for broadcast");
             StreamWriter str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
