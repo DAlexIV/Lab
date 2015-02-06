@@ -16,9 +16,7 @@ namespace TmpServ
         public static int port = 2500;
         public static int state = 0;
         public static MapServ curm;
-        
-        static IPEndPoint ep;
-      
+              
        
         static void Main(string[] args)
         {
@@ -27,7 +25,7 @@ namespace TmpServ
             Console.WriteLine("Type \"gennow N\" to generate map with roughly N/2 empty spaces");
             Console.WriteLine("Type \"load *.txt\" to load map from file");
             //string comm = "C:\\Users\\Artem\\Documents\\tmp.txt";
-            string comm = "C:\\Temp\\tmp.txt";
+            string comm = "C:\\Temp\\tmp.lab";
             curm.GenerateMapFromFile(comm);
             curm.notif = "Hi!";
             /*

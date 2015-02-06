@@ -27,7 +27,7 @@ namespace TmpServ
                 this.map = new int[height, width];
                 for (int i = 0; i < height; i++)
                     for (int j = 0; j < width; j++)
-                        this.map[i, j] = re.ReadByte();
+                        this.map[i, j] = re.ReadByte() - 128 ;
             }
             else
                 throw filefail;
