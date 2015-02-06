@@ -104,10 +104,10 @@ namespace TmpServ
                         throw new Exception("UNKNOWN IP, WTF MAN???");
                     else
                     {
-                        cur[pls[curpl].X, pls[curpl].Y] = 0; //Delete old player
-                        pls[curpl].X = mes2[0];
-                        pls[curpl].Y = mes2[1];
-                        cur[pls[curpl].X, pls[curpl].Y] = pls[curpl].M; //Make new player
+                        cur[pls[curpl].Y, pls[curpl].X] = 0; //Delete old player
+                        pls[curpl].Y = mes2[0];
+                        pls[curpl].X = mes2[1];
+                        cur[pls[curpl].Y, pls[curpl].X] = -curpl - 1; //Make new player
                         ++isConnected[curpl];
                     }
                     break;

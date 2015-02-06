@@ -10,7 +10,7 @@ namespace TmpServ
     {
         static internal PlayerServ BToPlayer(byte[] mes, byte[] strmes)
         {
-            return new PlayerServ(mes[0], mes[1], (char)mes[2], Encoding.ASCII.GetString(strmes));
+            return new PlayerServ(mes[1], mes[0], (char)mes[2], Encoding.ASCII.GetString(strmes));
         }
     }
 }
