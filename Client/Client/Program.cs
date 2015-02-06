@@ -10,7 +10,7 @@ namespace Client
     {
         public static Client.MapCl Map = new Client.MapCl();
         public static Client.PlayerCl Player = new Client.PlayerCl();
-        private const int listenPort = 11000;
+        private const int listenPort = 2500;
 
         public static int Main()
         {

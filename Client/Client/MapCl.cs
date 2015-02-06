@@ -55,7 +55,7 @@ namespace Client
         {
             for (int i = 0; i < map_height; ++i)
                 for (int k = 0; k < map_width; ++k)
-                    this[i, k] = mes[i * map_width + k] - 128;
+                    this[i, k] = (int)(mes[i * map_width + k]) - 128;
         }
         public void ByteToCharArr(byte[] mes)
         {
