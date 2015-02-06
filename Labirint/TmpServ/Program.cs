@@ -13,6 +13,7 @@ namespace TmpServ
     {
         public static bool isUpdated = false;
 
+        public static int port = 2500;
         public static int state = 0;
         public static MapServ curm;
         
@@ -28,6 +29,7 @@ namespace TmpServ
             //string comm = "C:\\Users\\Artem\\Documents\\tmp.txt";
             string comm = "C:\\Temp\\tmp.txt";
             curm.GenerateMapFromFile(comm);
+            curm.notif = "Hi!";
             /*
             if (comm.Split()[0] == "gennow")
                 curm.GenerateMapNow(int.Parse(comm.Split()[1]));
@@ -38,7 +40,8 @@ namespace TmpServ
                     throw new Exception("Fuck u anyway!");
              */
             state = 1;
-            Thread net_th = new Thread(Netw.Listen);
+            Netw cur_netw = new Netw(curm, port);
+            Thread net_th = new Thread(cur_netw.Listen);
             net_th.Start();
             while (Console.ReadLine() != "Stop");
             state = 2;

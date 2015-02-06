@@ -10,15 +10,21 @@ namespace TmpServ
 {
     class Netw
     {
-        static bool just_started = true;
-        static List<PlayerServ> pls = new List<PlayerServ>();
-        static List<int> isConnected_old = new List<int>();
-        static List<int> isConnected = new List<int>();
-        static int listenPort = 11000;
-        static Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-        static UdpClient listener = new UdpClient(listenPort);
-        
-        static void Checker(object state)
+        MapServ cur;
+        bool just_started = true;
+        List<PlayerServ> pls = new List<PlayerServ>();
+        List<int> isConnected_old = new List<int>();
+        List<int> isConnected = new List<int>();
+        int listenPort;
+        Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        UdpClient listener;
+        public Netw (MapServ cur, int port)
+        {
+            listenPort = port;
+            this.cur = cur;
+            listener = new UdpClient(port);
+        }
+        private void Checker(object state)
         {
             if (!just_started)
             {
@@ -34,33 +40,36 @@ namespace TmpServ
                 }
             }
         }
-        static int FindIP(IPEndPoint ip)
+        private int FindIP(IPEndPoint ip)
         {
             for (int i = 0; i < pls.Count(); ++i)
-                if (pls[i].IP == ip)
+                if (IPAddress.Equals(pls[i].IP.Address, ip.Address))
                     return i;
             return -1;
         }
-        static void ConOut(byte[] bytes, IPEndPoint groupEP)
+        private void ConOut(byte[] bytes, IPEndPoint groupEP)
         {
             Console.WriteLine("Received broadcast from {0} :\n {1}\n",
             groupEP.ToString(),
             Encoding.ASCII.GetString(bytes, 0, bytes.Length));
         }
-        static public void Listen()
+        public void Listen()
         {
-            Timer isConn = new Timer(new TimerCallback(Checker), new object(), 0, 5000);
+            // Timer isConn = new Timer(new TimerCallback(Checker), new object(), 0, 5000);
             while (Program.state != 2)
             {
-                ListenStep(Program.curm);
+                ListenStep(cur);
                 if (!just_started)
+                {
                     just_started = false;
+                }
+                SendAll(cur, pls);
             }
-            isConn.Dispose();
+            // isConn.Dispose();
             SendEndingMessageToAll();
 
         }
-        static void ListenStep(MapServ cur) //Sets connection up
+        private void ListenStep(MapServ cur) //Sets connection up
         {
             IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
             
@@ -96,7 +105,6 @@ namespace TmpServ
                     else
                     {
                         cur[pls[curpl].X, pls[curpl].Y] = 0; //Delete old player
-                        if (pls[curpl].X > 0 && pls[curpl].X < MapServ.map_width)
                         pls[curpl].X = mes2[0];
                         pls[curpl].Y = mes2[1];
                         cur[pls[curpl].X, pls[curpl].Y] = pls[curpl].M; //Make new player
@@ -113,10 +121,9 @@ namespace TmpServ
                 default:
                     throw new Exception("Unknown type of package");
             }
-            Program.isUpdated = true;
         }
 
-        private static void AddPlayer(IPEndPoint groupEP, byte[] mes, byte[] strmes)
+        private void AddPlayer(IPEndPoint groupEP, byte[] mes, byte[] strmes)
         {
             PlayerServ newpl = Decoding.BToPlayer(mes, strmes);
             groupEP.Port = listenPort;
@@ -126,19 +133,19 @@ namespace TmpServ
             isConnected_old.Add(0);
             }
 
-        private static void DeletePlayer(int curpl2)
+        private void DeletePlayer(int curpl2)
         {
             pls.RemoveAt(curpl2);
             isConnected.RemoveAt(curpl2);
             isConnected_old.RemoveAt(curpl2);
         }
-        static void SendAll(MapServ cur, List<PlayerServ> pls)
+        private void SendAll(MapServ cur, List<PlayerServ> pls)
         {
             for (int i = 0; i < pls.Count; ++i)
                 Sender(pls[i].IP, cur);
             Console.WriteLine("Sent to all");
         }
-        static public void Sender(IPEndPoint curip, MapServ cur)
+        private void Sender(IPEndPoint curip, MapServ cur)
         {
             cur.cur_players = pls.Count();
             for (int i = 0; i < pls.Count(); ++i)
@@ -159,12 +166,12 @@ namespace TmpServ
             for (int i = 0; i < cur.cur_players; ++i)
                 s.SendTo(names[i], curip);
         }
-        static private void SendEndingMessageToAll()
+        private void SendEndingMessageToAll()
         {
             for (int i = 0; i < pls.Count(); ++i)
                 SendEndingMessage(pls[i].IP);
         }
-        static private void SendEndingMessage(IPEndPoint curip)
+        private void SendEndingMessage(IPEndPoint curip)
         {
             byte[] tmp = {255};
             s.SendTo(tmp, curip);
