@@ -43,25 +43,25 @@ namespace Client
             switch (Console.ReadKey(true).Key)
             {
                 case ConsoleKey.S:
-                    if (map.Map[player.Y + 1, player.X] == 0)
+                    if (map.Map[player.Y + 1, player.X] != 1)
                     {
                         player.Y++;
                     }
                     break;
                 case ConsoleKey.A:
-                    if (map.Map[player.Y, player.X - 1] == 0)
+                    if (map.Map[player.Y, player.X - 1] !=1)
                     {
                         player.X--;
                     }
                     break;
                 case ConsoleKey.W:
-                    if (map.Map[player.Y - 1, player.X] == 0)
+                    if (map.Map[player.Y - 1, player.X] != 1)
                     {
                         player.Y--;
                     }
                     break;
                 case ConsoleKey.D:
-                    if (map.Map[player.Y, player.X + 1] == 0)
+                    if (map.Map[player.Y, player.X + 1] != 1)
                     {
                         player.X++;
                     }
