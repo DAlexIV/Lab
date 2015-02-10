@@ -59,12 +59,12 @@ namespace Client
         }
         private byte[] Reciever()
         {
-            Console.WriteLine("Listening" + groupEP.ToString());
+           // Console.WriteLine("Listening" + groupEP.ToString());
             byte[] bytes = listener.Receive(ref groupEP);
-            Console.WriteLine("Received broadcast from {0} :\n {1}\n",
-            groupEP.ToString(),
-            Encoding.ASCII.GetString(bytes, 0, bytes.Length).Length);
-            Console.WriteLine(groupEP.Address);
+            //Console.WriteLine("Received broadcast from {0} :\n {1}\n",
+            //groupEP.ToString(),
+           // Encoding.ASCII.GetString(bytes, 0, bytes.Length).Length);
+            //Console.WriteLine(groupEP.Address);
             return bytes;
         }
         public void Listen()
@@ -77,7 +77,7 @@ namespace Client
         }
         private void Listener()
         {
-            Console.WriteLine("Waiting for broadcast");
+          //  Console.WriteLine("Waiting for broadcast");
             StreamWriter str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
             //StreamWriter str = File.AppendText("C:\\Users\\Artem\\Documents\\newtesting.txt");
             using (str)
@@ -87,7 +87,7 @@ namespace Client
             str.Close();
                // System.Environment.Exit(0);
                 byte[] tmp = Reciever();
-                Console.WriteLine(tmp.Length);
+            //    Console.WriteLine(tmp.Length);
                 str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
                 using (str)
                 {
@@ -98,7 +98,7 @@ namespace Client
                 if (UDPListener.Map.cur_players != 255)
                 {
                     UDPListener.Map.ByteToMap(Reciever());
-                    Console.WriteLine("Recieved Map");
+                //    Console.WriteLine("Recieved Map");
                     str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
                     using (str)
                     {
@@ -106,7 +106,7 @@ namespace Client
                     }
                     str.Close();
                     UDPListener.Map.ByteToCharArr(Reciever());
-                    Console.WriteLine("Recieved char arr");
+              //      Console.WriteLine("Recieved char arr");
                     str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
                     using (str)
                     {
@@ -114,7 +114,7 @@ namespace Client
                     }
                     str.Close();
                     UDPListener.Map.notif = UDPListener.Map.ByteToString(Reciever());
-                    Console.WriteLine("Recieved notif");
+                  //  Console.WriteLine("Recieved notif");
                     str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
                     using (str)
                     {
@@ -124,7 +124,7 @@ namespace Client
                     string[] ret = new string[UDPListener.Map.cur_players];
                     for (int i = 0; i < UDPListener.Map.cur_players; ++i)
                         ret[i] = UDPListener.Map.ByteToString(Reciever());
-                    Console.WriteLine("Recieved names");
+                    //Console.WriteLine("Recieved names");
                     str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
                     using (str)
                     {
