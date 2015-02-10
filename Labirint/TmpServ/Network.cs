@@ -18,11 +18,24 @@ namespace TmpServ
         int listenPort;
         Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         UdpClient listener;
+        
         public Netw (MapServ cur, int port)
         {
             listenPort = port;
             this.cur = cur;
             listener = new UdpClient(port);
+        }
+        private string EpicOutPut(string mes)
+        {
+            string lines = "";
+            for (int i = 0; i < 10; ++i)
+                for (int k = 0; k < 50; ++k)
+                    lines += "/";
+            lines += mes;
+            for (int i = 0; i < 10; ++i)
+                for (int k = 0; k < 50; ++k)
+                    lines += "/";
+            return lines;
         }
         private void Checker(object state)
         {
@@ -39,6 +52,7 @@ namespace TmpServ
                         DeletePlayer(i);
                 }
             }
+            Console.Beep(300, 5000);
         }
         private int FindIP(IPEndPoint ip)
         {
@@ -58,7 +72,14 @@ namespace TmpServ
             // Timer isConn = new Timer(new TimerCallback(Checker), new object(), 0, 5000);
             while (Program.state != 2)
             {
-                ListenStep(cur);
+                try
+                {
+                    ListenStep(cur);
+                } 
+                catch (Exception ex)
+                {
+                    Console.WriteLine(EpicOutPut(ex.Message));
+                }
                 if (!just_started)
                 {
                     just_started = false;
@@ -156,11 +177,11 @@ namespace TmpServ
 
             byte[] num = { (byte)cur.cur_players };
             s.SendTo(num, curip);
-            Thread.Sleep(2);
+             // Thread.Sleep(2);
             s.SendTo(EncodingB.EncodingIntArrToByteStream(cur), curip);
-            Thread.Sleep(15);
+             // Thread.Sleep(15);
             s.SendTo(EncodingB.EncodingCharArrToByteStream(cur), curip);
-            Thread.Sleep(2);
+            // Thread.Sleep(2);
             s.SendTo(EncodingB.EncodingStringToByteStream(cur.notif), curip);
             byte[][] names = EncodingB.EncodingArrStringToByteStream(cur);
             for (int i = 0; i < cur.cur_players; ++i)
