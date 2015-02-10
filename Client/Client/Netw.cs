@@ -78,61 +78,68 @@ namespace Client
         private void Listener()
         {
             Console.WriteLine("Waiting for broadcast");
-            StreamWriter str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
+        //    StreamWriter str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
         //    StreamWriter str = File.AppendText("C:\\Users\\Artem\\Documents\\newtesting.txt");
-            using (str)
-            {
-                str.WriteLine("Waiting for broadcast");
-            }
-            str.Close();
+         //   using (str)
+          //  {
+          //      str.WriteLine("Waiting for broadcast");
+            // }
+            // str.Close();
                 //System.Environment.Exit(0);
                 byte[] tmp = Reciever();
                 Console.WriteLine(tmp.Length);
-                str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
-                using (str)
-                {
-                    str.WriteLine(tmp.Length.ToString());
-                }
-                str.Close();
+                //    str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
+                //  using (str)
+              //  {
+                //    str.WriteLine(tmp.Length.ToString());
+                // }
+                //str.Close();
                 UDPListener.Map.cur_players = (int)tmp[0];
                 if (UDPListener.Map.cur_players != 255)
                 {
-                    UDPListener.Map.ByteToMap(Reciever());
-                    Console.WriteLine("Recieved Map");
-                    str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
-                    using (str)
+                    try
                     {
-                        str.WriteLine("Recieved Map");
+                        UDPListener.Map.ByteToMap(Reciever());
+                        Console.WriteLine("Recieved Map");
+                        //   str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
+                        // using (str)
+                        //{
+                        //   str.WriteLine("Recieved Map");
+                        // }
+                        //str.Close();
+                        UDPListener.Map.ByteToCharArr(Reciever());
+                        Console.WriteLine("Recieved char arr");
+                        //  str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
+                        //  using (str)
+                        //  {
+                        //    str.WriteLine("Recieved char arr");
+                        // }
+                        //  str.Close();
+                        UDPListener.Map.notif = UDPListener.Map.ByteToString(Reciever());
+                        Console.WriteLine("Recieved notif");
+                        //    str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
+                        //   using (str)
+                        //  {
+                        //     str.WriteLine("Recieved notif");
+                        // }
+                        //   str.Close();
+                        string[] ret = new string[UDPListener.Map.cur_players];
+                        for (int i = 0; i < UDPListener.Map.cur_players; ++i)
+                            ret[i] = UDPListener.Map.ByteToString(Reciever());
+                        Console.WriteLine("Recieved names");
+                        //  str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
+                        //   using (str)
+                        //  {
+                        //    str.WriteLine("Recieved names");
+                        //  }
+                        // str.Close();
+                        UDPListener.Map.players_names = ret;
+                        //  str.Close();
                     }
-                    str.Close();
-                    UDPListener.Map.ByteToCharArr(Reciever());
-                    Console.WriteLine("Recieved char arr");
-                    str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
-                    using (str)
+                    catch ()
                     {
-                        str.WriteLine("Recieved char arr");
+                        Console.WriteLine("Bad packet. IGNORED!");
                     }
-                    str.Close();
-                    UDPListener.Map.notif = UDPListener.Map.ByteToString(Reciever());
-                    Console.WriteLine("Recieved notif");
-                    str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
-                    using (str)
-                    {
-                        str.WriteLine("Recieved notif");
-                    }
-                    str.Close();
-                    string[] ret = new string[UDPListener.Map.cur_players];
-                    for (int i = 0; i < UDPListener.Map.cur_players; ++i)
-                        ret[i] = UDPListener.Map.ByteToString(Reciever());
-                    Console.WriteLine("Recieved names");
-                    str = File.AppendText("C:\\Users\\Artem\\Documents\\tmp.txt");
-                    using (str)
-                    {
-                        str.WriteLine("Recieved names");
-                    }
-                    str.Close();
-                    UDPListener.Map.players_names = ret;
-                    str.Close();
                 }
 
                 else

@@ -156,11 +156,11 @@ namespace TmpServ
 
             byte[] num = { (byte)cur.cur_players };
             s.SendTo(num, curip);
-            Thread.Sleep(5);
+            Thread.Sleep(2);
             s.SendTo(EncodingB.EncodingIntArrToByteStream(cur), curip);
-            Thread.Sleep(5);
+            Thread.Sleep(15);
             s.SendTo(EncodingB.EncodingCharArrToByteStream(cur), curip);
-            Thread.Sleep(5);
+            Thread.Sleep(2);
             s.SendTo(EncodingB.EncodingStringToByteStream(cur.notif), curip);
             byte[][] names = EncodingB.EncodingArrStringToByteStream(cur);
             for (int i = 0; i < cur.cur_players; ++i)

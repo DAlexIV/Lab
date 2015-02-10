@@ -22,8 +22,11 @@ namespace TmpServ
         {
             curm = new MapServ();
             //Map Loading
+            
             Console.WriteLine("Type \"gennow N\" to generate map with roughly N/2 empty spaces");
             Console.WriteLine("Type \"load *.txt\" to load map from file");
+            for (int i = 0; i < 10; ++i)
+                Console.WriteLine("TURN OFF UR FUCKING FIREWALL!!!");
             //string comm = "C:\\Users\\Artem\\Documents\\tmp.txt";
             string comm = "C:\\Temp\\tmp.lab";
             curm.GenerateMapFromFile(comm);

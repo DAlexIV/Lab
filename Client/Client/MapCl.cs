@@ -58,12 +58,18 @@ namespace Client
         }
         public void ByteToMap(byte[] mes)
         {
+            if (mes.Length != map_height * map_width)
+                throw 
+                    new Exception("Wrong packet type");
             for (int i = 0; i < map_height; ++i)
                 for (int k = 0; k < map_width; ++k)
                     this.Map[i, k] = (int)(mes[i * map_width + k]) - 128;
         }
         public void ByteToCharArr(byte[] mes)
         {
+            if (mes.Length != 16)
+                throw
+                    new Exception("Wrong packet type");
             char[] ret = new char[cur_players];
             for (int i = 0; i < cur_players; ++i)
                 ret[i] = (char)mes[i];
