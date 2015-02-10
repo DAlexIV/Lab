@@ -75,7 +75,7 @@ namespace Client
                             map.map[i, j] = 0;
                         break;
             }
-            map.Map[player.Y, player.X] = -1;
+            
             cn.Send_Coords(player);
         }
     }

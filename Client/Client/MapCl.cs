@@ -11,12 +11,12 @@ namespace Client
         int[,] new_map = new int[GameClasses.Map.map_height, GameClasses.Map.map_width];
         public void generateCl_map()
         {
-            for (int i = 0; i < map.GetLength(0); i++)
+           /* for (int i = 0; i < map.GetLength(0); i++)
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
                     new_map[i, j] = map[i, j];
                     map[i, j] = 13;
-                }
+                }*/
         }
         public void ByteToInt(byte[] from)
         {
