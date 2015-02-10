@@ -136,7 +136,7 @@ namespace Client
                         UDPListener.Map.players_names = ret;
                         //  str.Close();
                     }
-                    catch ()
+                    catch 
                     {
                         Console.WriteLine("Bad packet. IGNORED!");
                     }
