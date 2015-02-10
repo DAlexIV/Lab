@@ -105,8 +105,8 @@ namespace TmpServ
                     else
                     {
                         cur[pls[curpl].Y, pls[curpl].X] = 0; //Delete old player
-                        pls[curpl].Y = mes2[0];
-                        pls[curpl].X = mes2[1];
+                        pls[curpl].X = mes2[0];
+                        pls[curpl].Y = mes2[1];
                         cur[pls[curpl].Y, pls[curpl].X] = -curpl - 1; //Make new player
                         ++isConnected[curpl];
                     }
@@ -131,6 +131,8 @@ namespace TmpServ
             pls.Add(newpl);
             isConnected.Add(0);
             isConnected_old.Add(0);
+            int ind = pls.Count() - 1;
+            cur[pls[ind].Y, pls[ind].X] = pls[ind].M;
             }
 
         private void DeletePlayer(int curpl2)

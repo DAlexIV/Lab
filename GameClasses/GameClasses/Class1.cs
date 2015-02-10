@@ -131,7 +131,7 @@ namespace GameClasses
             }
             set
             {
-                if (value < 2)
+                if (value < 128)
                     map[i, j] = value;
                 else
                     throw new Exception("Wrong map value");
