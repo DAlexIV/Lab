@@ -131,8 +131,6 @@ namespace TmpServ
             pls.Add(newpl);
             isConnected.Add(0);
             isConnected_old.Add(0);
-            int ind = pls.Count() - 1;
-            cur[pls[ind].Y, pls[ind].X] = pls[ind].M;
             }
 
         private void DeletePlayer(int curpl2)
