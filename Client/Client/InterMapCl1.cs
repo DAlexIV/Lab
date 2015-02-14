@@ -23,7 +23,8 @@ namespace Client
                                 break;
                             case 1:
                                 Console.SetCursorPosition(j, i + 2);
-                                if ((i == 0) || (i == map.Map.GetLength(0) - 1) || (j == 0) || (j == map.Map.GetLength(1) - 1))
+                                if ((i == 0) || (i == map.Map.GetLength(0) - 1)
+                                    || (j == 0) || (j == map.Map.GetLength(1) - 1))
                                     Console.BackgroundColor = ConsoleColor.DarkGray;
                                 else
                                     Console.BackgroundColor = ConsoleColor.Gray;

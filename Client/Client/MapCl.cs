@@ -69,14 +69,15 @@ namespace Client
         {
             if (mes.Length != 16)
                 throw
-                    new Exception("Wrong packet type");
+                    new 
+                        Exception("Wrong packet type");
             char[] ret = new char[cur_players];
             for (int i = 0; i < cur_players; ++i)
                 ret[i] = (char)mes[i];
             players_signs = ret;
         }
         public string ByteToString(byte[] s)
-        {
+        {   
             return Encoding.ASCII.GetString(s);
         }
     }
