@@ -18,8 +18,8 @@ namespace TmpServ
         int listenPort;
         Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         UdpClient listener;
-        
-        public Netw (MapServ cur, int port)
+
+        public Netw(MapServ cur, int port)
         {
             listenPort = port;
             this.cur = cur;
@@ -69,32 +69,30 @@ namespace TmpServ
         }
         public void Listen()
         {
-            // Timer isConn = new Timer(new TimerCallback(Checker), new object(), 0, 5000);
-            while (Program.state != 2)
+            Send sendmess = new Send(s);
+            try
             {
-                try
-                {
-                    ListenStep(cur);
-                } 
-                catch (Exception ex)
-                {
-                    Console.WriteLine(EpicOutPut(ex.Message));
-                }
-                if (!just_started)
-                {
-                    just_started = false;
-                }
-                SendAll(cur, pls);
+
+                ListenStep(cur);
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(EpicOutPut(ex.Message));
+            }
+            if (!just_started)
+            {
+                just_started = false;
+            }
+            sendmess.SendAll(ref cur, pls);
             // isConn.Dispose();
-            SendEndingMessageToAll();
+            sendmess.SendEndingMessageToAll(pls);
 
         }
         private void ListenStep(MapServ cur) //Sets connection up
         {
             IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
-            
-            
+
+
             IPEndPoint tmp = new IPEndPoint(IPAddress.Any, IPEndPoint.MaxPort);
             Console.WriteLine("Server is running");
             byte[] mestype = listener.Receive(ref groupEP);
@@ -107,12 +105,12 @@ namespace TmpServ
                 case 1: //Add player
                     byte[] mes = listener.Receive(ref groupEP);
                     ConOut(mes, groupEP);
-                    if (mes.Length != 3) 
+                    if (mes.Length != 3)
                         throw new Exception("New player package 1 fail");
                     byte[] strmes = listener.Receive(ref groupEP);
                     ConOut(strmes, groupEP);
                     AddPlayer(groupEP, mes, strmes);
-                        break;
+                    break;
                 case 2: //Move player
                     byte[] mes2 = listener.Receive(ref groupEP);
                     groupEP.Port = listenPort;
@@ -120,7 +118,7 @@ namespace TmpServ
                     if (mes2.Length != 2)
                         throw new Exception("Update package fail");
                     int curpl = FindIP(groupEP);
-                    
+
                     if (curpl == -1)
                         throw new Exception("UNKNOWN IP, WTF MAN???");
                     else
@@ -148,11 +146,11 @@ namespace TmpServ
         {
             PlayerServ newpl = Decoding.BToPlayer(mes, strmes);
             groupEP.Port = listenPort;
-            newpl.IP = groupEP;            
+            newpl.IP = groupEP;
             pls.Add(newpl);
             isConnected.Add(0);
             isConnected_old.Add(0);
-            }
+        }
 
         private void DeletePlayer(int curpl2)
         {
@@ -160,42 +158,6 @@ namespace TmpServ
             isConnected.RemoveAt(curpl2);
             isConnected_old.RemoveAt(curpl2);
         }
-        private void SendAll(MapServ cur, List<PlayerServ> pls)
-        {
-            for (int i = 0; i < pls.Count; ++i)
-                Sender(pls[i].IP, cur);
-            Console.WriteLine("Sent to all");
-        }
-        private void Sender(IPEndPoint curip, MapServ cur)
-        {
-            cur.cur_players = pls.Count();
-            for (int i = 0; i < pls.Count(); ++i)
-            {
-                cur.players_names[i] = pls[i].Name;
-                cur.players_signs[i] = pls[i].M;
-            }
 
-            byte[] num = { (byte)cur.cur_players };
-            s.SendTo(num, curip);
-             // Thread.Sleep(2);
-            s.SendTo(EncodingB.EncodingIntArrToByteStream(cur), curip);
-             // Thread.Sleep(15);
-            s.SendTo(EncodingB.EncodingCharArrToByteStream(cur), curip);
-            // Thread.Sleep(2);
-            s.SendTo(EncodingB.EncodingStringToByteStream(cur.notif), curip);
-            byte[][] names = EncodingB.EncodingArrStringToByteStream(cur);
-            for (int i = 0; i < cur.cur_players; ++i)
-                s.SendTo(names[i], curip);
-        }
-        private void SendEndingMessageToAll()
-        {
-            for (int i = 0; i < pls.Count(); ++i)
-                SendEndingMessage(pls[i].IP);
-        }
-        private void SendEndingMessage(IPEndPoint curip)
-        {
-            byte[] tmp = {255};
-            s.SendTo(tmp, curip);
-        }
     }
 }
