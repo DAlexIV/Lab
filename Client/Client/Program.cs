@@ -36,7 +36,8 @@ namespace Client
             Player.X = int.Parse(tmpline.Split()[0]);
             Player.Y = int.Parse(tmpline.Split()[1]);
             */
-            Player.Name = "Alex";
+            Console.WriteLine("Enter your name");
+            Player.Name = Console.ReadLine();
             cur_netw.Send_Token(Player); //Send player id
             //End of temp code
             Thread list_thread = new Thread(cur_netw.Listen); //Start listening
