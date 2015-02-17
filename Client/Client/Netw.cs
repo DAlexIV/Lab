@@ -16,7 +16,7 @@ namespace Client
         bool isEndPack = false;
         public IPEndPoint servIP ;
         //  System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Public\TestFolder\WriteLines2.txt", true);
-        int listenPort = 2500;
+        int listenPort = 6000;
         Socket soc;
         UdpClient listener;
         IPEndPoint groupEP;
