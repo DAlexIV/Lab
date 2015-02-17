@@ -8,7 +8,7 @@ namespace Client
 {
     public class GenInterCl
     {
-        public static int state=0;
+        public static int state=1;
         public static void controls()
         {
             switch (state)
