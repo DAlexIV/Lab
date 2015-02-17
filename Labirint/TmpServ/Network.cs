@@ -70,20 +70,23 @@ namespace TmpServ
         public void Listen()
         {
             Send sendmess = new Send(s);
-            try
+            while (Program.state != 2)
             {
+                try
+                {
 
-                ListenStep(cur);
+                    ListenStep(cur);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(EpicOutPut(ex.Message));
+                }
+                if (!just_started)
+                {
+                    just_started = false;
+                }
+                sendmess.SendAll(ref cur, pls);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(EpicOutPut(ex.Message));
-            }
-            if (!just_started)
-            {
-                just_started = false;
-            }
-            sendmess.SendAll(ref cur, pls);
             // isConn.Dispose();
             sendmess.SendEndingMessageToAll(pls);
 
