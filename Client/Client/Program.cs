@@ -43,14 +43,21 @@ namespace Client
             Thread list_thread = new Thread(cur_netw.Listen); //Start listening
             
             list_thread.Start();
-
-            Client.InterfaceCl0.init();
-            Client.GenInterCl.redraw();
+            Thread.Sleep(30);
+            for (int i = 0; i < Map.Map.GetLength(0); i++)
+                for (int j = 0; j < Map.Map.GetLength(1); j++)
+                    if (Map.Map[i, j] == -1)
+                    {
+                        Player.X = j;
+                        Player.Y = i;
+                    }
+                Client.InterfaceCl0.init();
+            //Client.GenInterCl.redraw();
             while (true)
             {
-                
+                Client.GenInterCl.redraw();  
                 Client.GenInterCl.controls();
-                Client.GenInterCl.redraw();            
+                          
             }
             Console.ReadKey();
             return 0;

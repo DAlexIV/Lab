@@ -12,7 +12,7 @@ namespace Client
 {
     public class Netw
     {
-        public static bool isUpdated;
+        public static bool isUpdated=true;
         bool isEndPack = false;
         public IPEndPoint servIP ;
         //  System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Public\TestFolder\WriteLines2.txt", true);
