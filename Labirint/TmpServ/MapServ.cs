@@ -33,7 +33,7 @@ namespace TmpServ
                     return true;
             return false;
         }
-        public void GenerateMapNow(int step)
+        public void GenerateMapNow()
         {
           Random rand = new Random();
             int width = map_width-2;
@@ -113,10 +113,10 @@ namespace TmpServ
                     }
                 }
             }
-            for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++)
+            for (int i = 0; i < map_height; i++)
+                for (int j = 0; j < map_width; j++)
                 {
-                    if ((i == 0) || (i == width - 1) || (j == 0) || (j == height - 1))
+                    if ((i == 0) || (i == map_height - 1) || (j == 0) || (j == map_width - 1))
                         map[i, j] = 1;
                     else
                         map[i, j] = matr[i - 1, j - 1];

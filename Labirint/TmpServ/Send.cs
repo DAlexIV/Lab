@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
-
+using System.Threading;
 namespace TmpServ
 {
     class Send
     {
         Socket s;
-        public Send(Socket s)
+        public Send(ref Socket s)
         {
             this.s = s;
         }
@@ -33,20 +33,22 @@ namespace TmpServ
                 cur.players_names[i] = pls[i].Name;
                 cur.players_signs[i] = pls[i].M;
             }
-
             byte[] num = { (byte)cur.cur_players };
             for (int i = 0; i < pls.Count(); ++i)
             {
                 s.SendTo(num, pls[i].IP);
             }
+            Thread.Sleep(3);
             for (int i = 0; i < pls.Count(); ++i)
             {
                 s.SendTo(EncodingB.EncodingIntArrToByteStream(cur), pls[i].IP);
             }
+            Thread.Sleep(3);
             for (int i = 0; i < pls.Count(); ++i)
             {
                 s.SendTo(EncodingB.EncodingCharArrToByteStream(cur), pls[i].IP);
             }
+            Thread.Sleep(3);
             for (int i = 0; i < pls.Count(); ++i)
             {
                 s.SendTo(EncodingB.EncodingStringToByteStream(cur.notif), pls[i].IP);

@@ -13,7 +13,7 @@ namespace TmpServ
     {
         public static bool isUpdated = false;
 
-        public static int port = 2500;
+        public static int port = 6000;
         public static int state = 0;
         public static MapServ curm;
               
@@ -29,7 +29,7 @@ namespace TmpServ
                 Console.WriteLine("TURN OFF UR FUCKING FIREWALL!!!");
             //string comm = "C:\\Users\\Artem\\Documents\\tmp.txt";
             string comm = "C:\\Temp\\tmp.lab";
-            curm.GenerateMapFromFile(comm);
+            curm.GenerateMapNow();
             curm.notif = "Hi!";
             /*
             if (comm.Split()[0] == "gennow")

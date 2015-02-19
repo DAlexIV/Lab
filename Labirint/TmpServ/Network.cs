@@ -69,13 +69,13 @@ namespace TmpServ
         }
         public void Listen()
         {
-            Send sendmess = new Send(s);
+            Send sendmess = new Send(ref s);
             while (Program.state != 2)
             {
                 try
                 {
 
-                    ListenStep(cur);
+                    ListenStep(ref cur);
                 }
                 catch (Exception ex)
                 {
@@ -85,13 +85,15 @@ namespace TmpServ
                 {
                     just_started = false;
                 }
+                Thread.Sleep(50);
                 sendmess.SendAll(ref cur, pls);
+                
             }
             // isConn.Dispose();
             sendmess.SendEndingMessageToAll(pls);
 
         }
-        private void ListenStep(MapServ cur) //Sets connection up
+        private void ListenStep(ref MapServ cur) //Sets connection up
         {
             IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
 
