@@ -77,7 +77,7 @@ namespace Client
         }
         public void Listen()
         {
-            //file = 
+            MapChanged += InterMapCl1.drawMap;
             while (!isEndPack)
             {
                 Listener();

@@ -34,15 +34,6 @@ namespace Client
              case 0:
                  Client.InterfaceCl0.draw();
                  break;
-             case 1:
-                 UDPListener.Map.generateCl_map();
-              //   UDPListener.Player.gen_position(UDPListener.Map);
-                 state = 2;
-                 Client.InterMapCl1.drawMap(UDPListener.Map);
-                 break;
-             case 2:
-                 Client.InterMapCl1.drawMap(UDPListener.Map);
-                 break;
          }
         }
     }

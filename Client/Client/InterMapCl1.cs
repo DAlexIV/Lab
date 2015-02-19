@@ -9,14 +9,14 @@ namespace Client
 {
     class InterMapCl1
     {
-        public static void drawMap(MapCl map)
+        public static void drawMap(object sender, MapArgs args)
         {
 
-                for (int i = 0; i < map.map.GetLength(0); i++)
-                    for (int j = 0; j < map.map.GetLength(1); j++)
+                for (int i = 0; i < args.mp.map.GetLength(0); i++)
+                    for (int j = 0; j < args.mp.map.GetLength(1); j++)
                     {
-                        if (map.Map[i, j] != map.map[i, j])
-                            switch (map.Map[i, j])
+                        if (args.mp.Map[i, j] != args.mp.map[i, j])
+                            switch (args.mp.Map[i, j])
                             {
                                 case 0:
                                     Console.SetCursorPosition(j, i + 2);
@@ -25,8 +25,8 @@ namespace Client
                                     break;
                                 case 1:
                                     Console.SetCursorPosition(j, i + 2);
-                                    if ((i == 0) || (i == map.Map.GetLength(0) - 1)
-                                        || (j == 0) || (j == map.Map.GetLength(1) - 1))
+                                    if ((i == 0) || (i == args.mp.Map.GetLength(0) - 1)
+                                        || (j == 0) || (j == args.mp.Map.GetLength(1) - 1))
                                         Console.BackgroundColor = ConsoleColor.DarkGray;
                                     else
                                         Console.BackgroundColor = ConsoleColor.Gray;
@@ -38,7 +38,7 @@ namespace Client
                                     Console.Write('#');
                                     break;
                             }
-                        map.map[i, j] = map.Map[i, j];
+                        args.mp.map[i, j] = args.mp.Map[i, j];
                     }
 
         }

@@ -53,6 +53,9 @@ namespace Client
                     }
                 Client.InterfaceCl0.init();
             //Client.GenInterCl.redraw();
+                for (int i = 0; i < Map.Map.GetLength(0); i++)
+                    for (int j = 0; j < Map.Map.GetLength(1); j++)
+                        Map.map[i, j] = 0;
             while (true)
             {
                 Client.GenInterCl.redraw();  
