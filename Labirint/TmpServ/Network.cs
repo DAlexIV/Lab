@@ -71,10 +71,9 @@ namespace TmpServ
         {
             Send sendmess = new Send(ref s);
             while (Program.state != 2)
+	{
+            try
             {
-                try
-                {
-
                     ListenStep(ref cur);
                 }
                 catch (Exception ex)
@@ -87,8 +86,12 @@ namespace TmpServ
                 }
                 Thread.Sleep(50);
                 sendmess.SendAll(ref cur, pls);
-                
             }
+            if (!just_started)
+            {
+                just_started = false;
+            }
+            sendmess.SendAll(ref cur, pls);
             // isConn.Dispose();
             sendmess.SendEndingMessageToAll(pls);
 

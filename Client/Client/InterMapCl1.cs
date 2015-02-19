@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Client
 {
@@ -78,6 +79,7 @@ namespace Client
             }
             
             cn.Send_Coords(player);
+            Thread.Sleep(30);
         }
     }
 }

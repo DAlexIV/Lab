@@ -10,7 +10,7 @@ namespace Client
     {
         public static Client.MapCl Map = new Client.MapCl();
         public static Client.PlayerCl Player = new Client.PlayerCl();
-        private const int listenPort = 2500;
+        private const int listenPort = 6000;
         static public Netw cur_netw;
 
         public static int Main()
@@ -45,10 +45,12 @@ namespace Client
             list_thread.Start();
 
             Client.InterfaceCl0.init();
+            Client.GenInterCl.redraw();
             while (true)
             {
-                Client.GenInterCl.redraw();
+                
                 Client.GenInterCl.controls();
+                Client.GenInterCl.redraw();            
             }
             Console.ReadKey();
             return 0;
