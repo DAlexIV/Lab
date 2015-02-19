@@ -21,7 +21,6 @@ namespace Client
     public class Netw
     {
         public event EventHandler<MapArgs> MapChanged;
-        //public static bool isUpdated=true;
         bool isEndPack = false;
         public IPEndPoint servIP ;
         //  System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Public\TestFolder\WriteLines2.txt", true);
