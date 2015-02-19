@@ -45,10 +45,12 @@ namespace Client
             list_thread.Start();
 
             Client.InterfaceCl0.init();
+            Client.GenInterCl.redraw();
             while (true)
             {
-                Client.GenInterCl.redraw();
+                
                 Client.GenInterCl.controls();
+                Client.GenInterCl.redraw();            
             }
             Console.ReadKey();
             return 0;
