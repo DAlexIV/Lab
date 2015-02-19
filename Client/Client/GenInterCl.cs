@@ -35,7 +35,7 @@ namespace Client
                  break;
              case 1:
                  UDPListener.Map.generateCl_map();
-                 UDPListener.Player.gen_position(UDPListener.Map);
+              //   UDPListener.Player.gen_position(UDPListener.Map);
                  state = 2;
                  Client.InterMapCl1.drawMap(UDPListener.Map);
                  break;

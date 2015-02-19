@@ -43,7 +43,7 @@ namespace Client
             Thread list_thread = new Thread(cur_netw.Listen); //Start listening
             
             list_thread.Start();
-            Thread.Sleep(30);
+            Thread.Sleep(100);
             for (int i = 0; i < Map.Map.GetLength(0); i++)
                 for (int j = 0; j < Map.Map.GetLength(1); j++)
                     if (Map.Map[i, j] == -1)
