@@ -10,7 +10,7 @@ using System.IO;
 
 namespace Client
 {
-    class MapArgs : EventArgs
+    public class MapArgs : EventArgs
     {
         public MapCl mp;
         public MapArgs(MapCl mp)
