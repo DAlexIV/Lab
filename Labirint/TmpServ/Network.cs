@@ -16,7 +16,7 @@ namespace TmpServ
         List<int> isConnected_old = new List<int>();
         List<int> isConnected = new List<int>();
         int listenPort;
-        Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        public Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         UdpClient listener;
 
         public Netw(MapServ cur, int port)
@@ -89,8 +89,12 @@ namespace TmpServ
             }
             sendmess.SendAll(ref cur, pls);
             // isConn.Dispose();
-            sendmess.SendEndingMessageToAll(pls);
 
+        }
+
+        public void GetOutOfThem(Send sendmess)
+        {
+            sendmess.SendEndingMessageToAll(pls);
         }
         private void ListenStep(ref MapServ cur) //Sets connection up
         {
