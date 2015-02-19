@@ -113,7 +113,7 @@ namespace TmpServ
                 case 1: //Add player
                     byte[] mes = listener.Receive(ref groupEP);
                     ConOut(mes, groupEP);
-                    if (mes.Length != 3)
+                    if (mes.Length != 1)
                         throw new Exception("New player package 1 fail");
                     byte[] strmes = listener.Receive(ref groupEP);
                     ConOut(strmes, groupEP);
@@ -152,7 +152,7 @@ namespace TmpServ
 
         private void AddPlayer(IPEndPoint groupEP, byte[] mes, byte[] strmes)
         {
-            PlayerServ newpl = Decoding.BToPlayer(mes, strmes);
+            PlayerServ newpl = new PlayerServ((char)mes[0], Encoding.ASCII.GetString(strmes), ref cur, pls.Count());
             groupEP.Port = listenPort;
             newpl.IP = groupEP;
             pls.Add(newpl);

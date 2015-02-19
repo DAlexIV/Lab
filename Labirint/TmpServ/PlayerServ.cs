@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using System.Net;
 namespace TmpServ
 {
-    class PlayerServ : GameClasses.Player
+    public class PlayerServ : GameClasses.Player
     {
         public IPEndPoint IP;
-        public PlayerServ(int x, int y, char ch, string name)
+        public PlayerServ(char ch, string name, ref MapServ map, int n)
         {
-            this.x = x;
-            this.x = y;
+
+            gen_position(map, n + 1);
             this.m = ch;
             this.name = name;
         }

@@ -13,6 +13,24 @@ namespace GameClasses
         protected int y;
         protected char m;
         protected string name;
+        public void gen_position(Map map, int id)
+        {
+            Random rand = new Random();
+            int k = 0;
+            int[,] matr = new int[2, map.map.Length];
+            for (int i = 0; i < map.map.GetLength(0); i++)
+                for (int j = 0; j < map.map.GetLength(1); j++)
+                    if (map.map[i, j] == 0)
+                    {
+                        matr[0, k] = i;
+                        matr[1, k] = j;
+                        k++;
+                    }
+            int p = rand.Next(k);
+            X = matr[0, p];
+            Y = matr[1, p];
+            map.map[Y, X] = -id;
+        }
         public int X
         {
             get
@@ -90,7 +108,7 @@ namespace GameClasses
         //Строка для уведомлений игроков, тоже должна показываться где-нибудь в течении какого-нибудь времени
         //В идеале это может быть даже некоторый набор строк, то есть будут показываться последние несколько
         //В случае отсутствия каких-либо действий равна null
-        public string notif; 
+        public string notif;
         public int[,] generate_map()
         {
             Random gen = new Random();

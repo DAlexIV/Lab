@@ -44,7 +44,7 @@ namespace Client
         public void Send_Token(PlayerCl pl) //Отсылает класс Player в начале игры
         {
             byte[] reg = { 1 };
-            byte[] coords = {(byte)pl.X, (byte)pl.Y, (byte)(pl.M)};
+            byte[] coords = {(byte)(pl.M)};
             
             soc.SendTo(reg, servIP);
             Thread.Sleep(5);
