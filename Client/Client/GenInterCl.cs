@@ -8,7 +8,7 @@ namespace Client
 {
     public class GenInterCl
     {
-        public static int state=0;
+        public static int state = 0;
         public static void controls()
         {
             switch (state)
@@ -22,27 +22,27 @@ namespace Client
                     state = 2;
                     break;
                 case 2:
-                    Client.InterMapCl1.control(UDPListener.Map,UDPListener.Player, UDPListener.cur_netw);
+                    Client.InterMapCl1.control(UDPListener.Map, UDPListener.Player, UDPListener.cur_netw);
                     break;
             }
         }
         public static void redraw()
         {
-         switch (state)
-         {
-             case 0:
-                 Client.InterfaceCl0.draw();
-                 break;
-             case 1:
-                 UDPListener.Map.generateCl_map();
-                 UDPListener.Player.gen_position(UDPListener.Map);
-                 state = 2;
-                 Client.InterMapCl1.drawMap(UDPListener.Map);
-                 break;
-             case 2:
-                 Client.InterMapCl1.drawMap(UDPListener.Map);
-                 break;
-         }
+            switch (state)
+            {
+                case 0:
+                    Client.InterfaceCl0.draw();
+                    break;
+                case 1:
+                    UDPListener.Map.generateCl_map();
+                    UDPListener.Player.gen_position(UDPListener.Map);
+                    state = 2;
+                    Client.InterMapCl1.drawMap(UDPListener.Map);
+                    break;
+                case 2:
+                    Client.InterMapCl1.drawMap(UDPListener.Map);
+                    break;
+            }
         }
     }
 }

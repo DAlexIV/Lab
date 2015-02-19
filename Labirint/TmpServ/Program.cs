@@ -44,11 +44,15 @@ namespace TmpServ
             Netw cur_netw = new Netw(curm, port);
             Thread net_th = new Thread(cur_netw.Listen);
             net_th.Start();
+
             while (Console.ReadLine() != "Stop");
-            state = 2;
+
+            net_th.Abort();
+            Send endmes = new Send(ref cur_netw.s);
+            cur_netw.GetOutOfThem(endmes);
             Console.WriteLine("End");
             Thread.Sleep(100);
-            net_th.Abort();
+            
             System.Environment.Exit(0);
         }
     }

@@ -27,8 +27,8 @@ namespace GameClasses
                         k++;
                     }
             int p = rand.Next(k);
-            X = matr[0, p];
-            Y = matr[1, p];
+            Y = matr[0, p];
+            X = matr[1, p];
             map.map[Y, X] = -id;
         }
         public int X

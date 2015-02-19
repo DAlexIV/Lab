@@ -10,9 +10,18 @@ using System.IO;
 
 namespace Client
 {
+    class MapArgs : EventArgs
+    {
+        public MapCl mp;
+        public MapArgs(MapCl mp)
+        {
+            this.mp = mp;
+        }
+    }
     public class Netw
     {
-        public static bool isUpdated=true;
+        public event EventHandler<MapArgs> MapChanged;
+        //public static bool isUpdated=true;
         bool isEndPack = false;
         public IPEndPoint servIP ;
         //  System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Public\TestFolder\WriteLines2.txt", true);
@@ -134,7 +143,9 @@ namespace Client
                         //  }
                         // str.Close();
                         UDPListener.Map.players_names = ret;
-                        isUpdated = true;
+                        MapArgs args = new MapArgs(UDPListener.Map);
+                        MapChanged(this, args);
+                        //isUpdated = true;
                         //  str.Close();
                     }
                     catch 

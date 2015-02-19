@@ -84,12 +84,8 @@ namespace TmpServ
                 {
                     just_started = false;
                 }
-                Thread.Sleep(50);
+                //Thread.Sleep(25);
                 sendmess.SendAll(ref cur, pls);
-            }
-            if (!just_started)
-            {
-                just_started = false;
             }
             sendmess.SendAll(ref cur, pls);
             // isConn.Dispose();
