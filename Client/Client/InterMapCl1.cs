@@ -11,6 +11,7 @@ namespace Client
     {
         public static void drawMap(MapCl map)
         {
+
                 for (int i = 0; i < map.map.GetLength(0); i++)
                     for (int j = 0; j < map.map.GetLength(1); j++)
                     {
@@ -39,6 +40,7 @@ namespace Client
                             }
                         map.map[i, j] = map.Map[i, j];
                     }
+
         }
         public static void control(MapCl map, PlayerCl player, Netw cn)
         {
