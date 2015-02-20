@@ -53,8 +53,8 @@ namespace Client
         {
             Stopwatch sw = new Stopwatch();
             byte[] tmp = { 0 };
+            soc.SendTo(tmp, servIP);
             sw.Start();
-            DateTime start = DateTime.Now;
             tmp = Reciever();
             if (tmp.Length != 1)
                 throw new Exception("Wrong packet type");
