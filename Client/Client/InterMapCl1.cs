@@ -16,27 +16,33 @@ namespace Client
                     for (int j = 0; j < args.mp.map.GetLength(1); j++)
                     {
                         if (args.mp.Map[i, j] != args.mp.map[i, j])
-                            switch (args.mp.Map[i, j])
+                            if (args.mp.Map[i, j] < 0 && args.mp.Map[i, j] > -16)
                             {
-                                case 0:
-                                    Console.SetCursorPosition(j, i + 2);
-                                    Console.ResetColor();
-                                    Console.Write(' ');
-                                    break;
-                                case 1:
-                                    Console.SetCursorPosition(j, i + 2);
-                                    if ((i == 0) || (i == args.mp.Map.GetLength(0) - 1)
-                                        || (j == 0) || (j == args.mp.Map.GetLength(1) - 1))
-                                        Console.BackgroundColor = ConsoleColor.DarkGray;
-                                    else
-                                        Console.BackgroundColor = ConsoleColor.Gray;
-                                    Console.Write(' ');
-                                    break;
-                                case -1:
-                                    Console.SetCursorPosition(j, i + 2);
-                                    Console.ResetColor();
-                                    Console.Write('#');
-                                    break;
+                                Console.SetCursorPosition(j, i + 2);
+                                Console.ResetColor();
+                                Console.Write(args.mp.players_signs[-args.mp.Map[i, j]]);
+                            }
+                            else
+                            {
+                                switch (args.mp.Map[i, j])
+                                {
+                                    case 0:
+                                        Console.SetCursorPosition(j, i + 2);
+                                        Console.ResetColor();
+                                        Console.Write(' ');
+                                        break;
+                                    case 1:
+                                        Console.SetCursorPosition(j, i + 2);
+                                        if ((i == 0) || (i == args.mp.Map.GetLength(0) - 1)
+                                            || (j == 0) || (j == args.mp.Map.GetLength(1) - 1))
+                                            Console.BackgroundColor = ConsoleColor.DarkGray;
+                                        else
+                                            Console.BackgroundColor = ConsoleColor.Gray;
+                                        Console.Write(' ');
+                                        break;
+                                    default:
+                                        throw new Exception("BAD VALUE IN MAP");
+                                }
                             }
                         args.mp.map[i, j] = args.mp.Map[i, j];
                     }

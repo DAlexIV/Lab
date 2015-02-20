@@ -8,6 +8,7 @@ namespace Client
 {
     public class PlayerCl : GameClasses.Player
     {
+        public int id;
         public PlayerCl()
         {
             x = 0;

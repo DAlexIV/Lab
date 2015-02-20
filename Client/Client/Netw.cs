@@ -36,13 +36,20 @@ namespace Client
             listener = new UdpClient(listenPort);
             groupEP = new IPEndPoint(IPAddress.Any, listenPort);
         }
+        public int GetNumberOfPlayersOnServ()
+        {
+            byte[] mes = Reciever();
+            if (mes.Length != 1)
+                throw new Exception("Wrong packet type");
+            return mes[0];
+        }
         public void TestPing()
         {
             Console.WriteLine("PING");
             Thread lst = new Thread(WaitForPing);
             lst.Start();
             Thread.Sleep(1000);
-            if (lst != null)
+            if (lst.IsAlive)
             {
                 Console.WriteLine("IT TOOK MORE THAN ONE SECOND");
                 Console.WriteLine("ABORTING");

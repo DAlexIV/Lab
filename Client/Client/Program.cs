@@ -40,23 +40,16 @@ namespace Client
             Console.WriteLine("Enter your name");
             Player.Name = Console.ReadLine();
             cur_netw.Send_Token(Player); //Send player id
-            //End of temp code
+            Player.id = cur_netw.GetNumberOfPlayersOnServ();
+            //End of temp codes
             Thread list_thread = new Thread(cur_netw.Listen); //Start listening
             
             list_thread.Start();
             Thread.Sleep(100);
-            for (int i = 0; i < Map.Map.GetLength(0); i++)
-                for (int j = 0; j < Map.Map.GetLength(1); j++)
-                    if (Map.Map[i, j] == -1)
-                    {
-                        Player.X = j;
-                        Player.Y = i;
-                    }
-                Client.InterfaceCl0.init();
+            FindYourself();
+            Client.InterfaceCl0.init();
             //Client.GenInterCl.redraw();
-                for (int i = 0; i < Map.Map.GetLength(0); i++)
-                    for (int j = 0; j < Map.Map.GetLength(1); j++)
-                        Map.map[i, j] = 0;
+            CastBigMapToZeros();
             while (true)
             {
                 Client.GenInterCl.redraw();  
@@ -65,6 +58,24 @@ namespace Client
             }
             Console.ReadKey();
             return 0;
+        }
+
+        private static void CastBigMapToZeros()
+        {
+            for (int i = 0; i < Map.Map.GetLength(0); i++)
+                for (int j = 0; j < Map.Map.GetLength(1); j++)
+                    Map.map[i, j] = 0;
+        }
+
+        private static void FindYourself()
+        {
+            for (int i = 0; i < Map.Map.GetLength(0); i++)
+                for (int j = 0; j < Map.Map.GetLength(1); j++)
+                    if (Map.Map[i, j] == Player.M)
+                    {
+                        Player.X = j;
+                        Player.Y = i;
+                    }
         }
     }
 }
