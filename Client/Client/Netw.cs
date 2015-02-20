@@ -28,10 +28,10 @@ namespace Client
         Socket soc;
         UdpClient listener;
         IPEndPoint groupEP;
-        public Netw(int port)
+        public Netw(int port, string line)
         {
             this.listenPort = port;
-            servIP = new IPEndPoint(IPAddress.Any, listenPort);
+            servIP = new IPEndPoint(IPAddress.Parse(line), listenPort);
             soc = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             listener = new UdpClient(listenPort);
             groupEP = new IPEndPoint(IPAddress.Any, listenPort);
@@ -50,8 +50,10 @@ namespace Client
         }
         private void WaitForPing()
         {
+            byte[] tmp = { 0 };
+            soc.SendTo(tmp, servIP);
             DateTime start = DateTime.Now;
-            byte[] tmp = Reciever();
+            tmp = Reciever();
             if (tmp.Length != 1)
                 throw new Exception("Wrong packet type");
             if (tmp[0] == 0)
@@ -64,11 +66,6 @@ namespace Client
             {
                 Console.WriteLine("FAILED WRONG BYTE");
             }
-        }
-        public void Set_Serv_Ip(ref string line) //Устанавливает IP сервера
-        {
-            servIP.Address = IPAddress.Parse(line);
-            servIP.Port = listenPort;
         }
         public void Send_Coords(PlayerCl pl) //Отсылает координаты
         {

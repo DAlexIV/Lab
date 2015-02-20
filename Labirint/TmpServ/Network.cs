@@ -112,8 +112,8 @@ namespace TmpServ
             switch (mestype[0])
             {
                 case 0:
-                    
-
+                    snd.SendConnMes(groupEP);
+                    break;
                 case 1: //Add player
                     byte[] mes = listener.Receive(ref groupEP);
                     ConOut(mes, groupEP);

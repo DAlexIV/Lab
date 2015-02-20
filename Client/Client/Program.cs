@@ -22,10 +22,10 @@ namespace Client
             //Temporary block of code (just for testing)
 
             //Reading player id
-            cur_netw = new Netw(listenPort);
+            
             Console.WriteLine("Enter IP: ");
             string line = Console.ReadLine();
-            cur_netw.Set_Serv_Ip(ref line);
+            cur_netw = new Netw(listenPort, line);
             cur_netw.TestPing();
             /*
             Console.WriteLine("Enter player name: ");
