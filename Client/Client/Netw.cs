@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.IO;
-
+using System.Diagnostics;
 namespace Client
 {
     public class MapArgs : EventArgs
@@ -40,6 +40,7 @@ namespace Client
         {
             Console.WriteLine("PING");
             Thread lst = new Thread(WaitForPing);
+            lst.Start();
             Thread.Sleep(1000);
             if (lst != null)
             {
@@ -50,8 +51,9 @@ namespace Client
         }
         private void WaitForPing()
         {
+            Stopwatch sw = new Stopwatch();
             byte[] tmp = { 0 };
-            soc.SendTo(tmp, servIP);
+            sw.Start();
             DateTime start = DateTime.Now;
             tmp = Reciever();
             if (tmp.Length != 1)
@@ -59,8 +61,8 @@ namespace Client
             if (tmp[0] == 0)
             {
                 Console.WriteLine("OK");
-                TimeSpan el = start - DateTime.Now;
-                Console.WriteLine("It tooks " + el.ToString());
+                sw.Stop();  
+                Console.WriteLine("It tooks " + sw.Elapsed);
             }
             else
             {
