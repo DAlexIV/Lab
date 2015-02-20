@@ -112,7 +112,7 @@ namespace TmpServ
             switch (mestype[0])
             {
                 case 0:
-                    snd.SendConnMes(groupEP);
+                    snd.SendConnMes(new IPEndPoint(groupEP.Address, listenPort));
                     Console.WriteLine("PING RECIEVED!");
                     break;
                 case 1: //Add player
