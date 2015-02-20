@@ -113,6 +113,7 @@ namespace TmpServ
             {
                 case 0:
                     snd.SendConnMes(groupEP);
+                    Console.WriteLine("PING RECIEVED!");
                     break;
                 case 1: //Add player
                     byte[] mes = listener.Receive(ref groupEP);
