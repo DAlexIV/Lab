@@ -48,7 +48,7 @@ namespace TmpServ
             while (Console.ReadLine() != "Stop");
 
             net_th.Abort();
-            Send endmes = new Send(ref cur_netw.s);
+            Send endmes = new Send(cur_netw.s);
             cur_netw.GetOutOfThem(endmes);
             Console.WriteLine("End");
             Thread.Sleep(100);

@@ -11,7 +11,7 @@ namespace TmpServ
     class Send
     {
         Socket s;
-        public Send(ref Socket s)
+        public Send(Socket s)
         {
             this.s = s;
         }
@@ -19,6 +19,11 @@ namespace TmpServ
         {
             for (int i = 0; i < pls.Count(); ++i)
                 SendEndingMessage(pls[i].IP);
+        }
+        public void SendConnMes(IPEndPoint curip)
+        {
+            byte[] tmp = { 0 };
+            s.SendTo(tmp, curip);
         }
         public void SendEndingMessage(IPEndPoint curip)
         {

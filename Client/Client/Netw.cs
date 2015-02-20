@@ -36,6 +36,35 @@ namespace Client
             listener = new UdpClient(listenPort);
             groupEP = new IPEndPoint(IPAddress.Any, listenPort);
         }
+        public void TestPing()
+        {
+            Console.WriteLine("PING");
+            Thread lst = new Thread(WaitForPing);
+            Thread.Sleep(1000);
+            if (lst != null)
+            {
+                Console.WriteLine("IT TOOK MORE THAN ONE SECOND");
+                Console.WriteLine("ABORTING");
+                lst.Abort();
+            }
+        }
+        private void WaitForPing()
+        {
+            DateTime start = DateTime.Now;
+            byte[] tmp = Reciever();
+            if (tmp.Length != 1)
+                throw new Exception("Wrong packet type");
+            if (tmp[0] == 0)
+            {
+                Console.WriteLine("OK");
+                TimeSpan el = start - DateTime.Now;
+                Console.WriteLine("It tooks " + el.ToString());
+            }
+            else
+            {
+                Console.WriteLine("FAILED WRONG BYTE");
+            }
+        }
         public void Set_Serv_Ip(ref string line) //Устанавливает IP сервера
         {
             servIP.Address = IPAddress.Parse(line);

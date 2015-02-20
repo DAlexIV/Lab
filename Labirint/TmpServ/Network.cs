@@ -10,6 +10,7 @@ namespace TmpServ
 {
     class Netw
     {
+        Send snd;
         MapServ cur;
         bool just_started = true;
         List<PlayerServ> pls = new List<PlayerServ>();
@@ -69,7 +70,7 @@ namespace TmpServ
         }
         public void Listen()
         {
-            Send sendmess = new Send(ref s);
+            snd = new Send(s);
             while (Program.state != 2)
 	{
             try
@@ -85,9 +86,9 @@ namespace TmpServ
                     just_started = false;
                 }
                 //Thread.Sleep(25);
-                sendmess.SendAll(ref cur, pls);
+                snd.SendAll(ref cur, pls);
             }
-            sendmess.SendAll(ref cur, pls);
+            snd.SendAll(ref cur, pls);
             // isConn.Dispose();
 
         }
@@ -110,6 +111,9 @@ namespace TmpServ
             ConOut(mestype, groupEP);
             switch (mestype[0])
             {
+                case 0:
+                    
+
                 case 1: //Add player
                     byte[] mes = listener.Receive(ref groupEP);
                     ConOut(mes, groupEP);

@@ -26,6 +26,7 @@ namespace Client
             Console.WriteLine("Enter IP: ");
             string line = Console.ReadLine();
             cur_netw.Set_Serv_Ip(ref line);
+            cur_netw.TestPing();
             /*
             Console.WriteLine("Enter player name: ");
             Player.Name = Console.ReadLine();
