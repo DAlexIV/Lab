@@ -11,28 +11,28 @@ namespace Client
     {
         public static void drawMap(object sender, MapArgs args)
         {
-
+               
                 for (int i = 0; i < args.mp.map.GetLength(0); i++)
                     for (int j = 0; j < args.mp.map.GetLength(1); j++)
                     {
                         if (args.mp.Map[i, j] != args.mp.map[i, j])
                             if (args.mp.Map[i, j] < 0 && args.mp.Map[i, j] > -16)
                             {
-                                Console.SetCursorPosition(j, i + 2);
+                                Console.SetCursorPosition(j, i);
                                 Console.ResetColor();
-                                Console.Write(args.mp.players_signs[-args.mp.Map[i, j] + 1]);
+                                Console.Write(args.mp.players_signs[-args.mp.Map[i, j] - 1]);
                             }
                             else
                             {
                                 switch (args.mp.Map[i, j])
                                 {
                                     case 0:
-                                        Console.SetCursorPosition(j, i + 2);
+                                        Console.SetCursorPosition(j, i);
                                         Console.ResetColor();
                                         Console.Write(' ');
                                         break;
                                     case 1:
-                                        Console.SetCursorPosition(j, i + 2);
+                                        Console.SetCursorPosition(j, i);
                                         if ((i == 0) || (i == args.mp.Map.GetLength(0) - 1)
                                             || (j == 0) || (j == args.mp.Map.GetLength(1) - 1))
                                             Console.BackgroundColor = ConsoleColor.DarkGray;

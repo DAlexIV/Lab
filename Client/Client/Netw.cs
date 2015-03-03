@@ -179,6 +179,7 @@ namespace Client
                         UDPListener.Map.players_names = ret;
                         MapArgs args = new MapArgs(UDPListener.Map);
                         MapChanged(this, args);
+                        //Thread.Sleep(10);
                         //isUpdated = true;
                         //  str.Close();
                     }

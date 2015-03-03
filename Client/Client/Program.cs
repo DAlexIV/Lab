@@ -52,7 +52,7 @@ namespace Client
             CastBigMapToZeros();
             while (true)
             {
-                Client.GenInterCl.redraw();  
+                Client.GenInterCl.redraw(Map);  
                 Client.GenInterCl.controls();
                           
             }

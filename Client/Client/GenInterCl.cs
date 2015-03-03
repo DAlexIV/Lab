@@ -8,7 +8,12 @@ namespace Client
 {
     public class GenInterCl
     {
+        public static event EventHandler<MapArgs> MapChanged;
         public static int state = 0;
+        static GenInterCl()
+        {
+            MapChanged += InterMapCl1.drawMap;
+        }
         public static void controls()
         {
             switch (state)
@@ -26,13 +31,13 @@ namespace Client
                     break;
             }
         }
-        public static void redraw()
+        public static void redraw(MapCl mp)
         {
-
          switch (state)
          {
              case 0:
-                 Client.InterfaceCl0.draw();
+                 MapArgs args = new MapArgs(UDPListener.Map);
+                 MapChanged(null, args);
                  break;
          }
         }
