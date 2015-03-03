@@ -71,7 +71,7 @@ namespace Client
         {
             for (int i = 0; i < Map.Map.GetLength(0); i++)
                 for (int j = 0; j < Map.Map.GetLength(1); j++)
-                    if (Map.Map[i, j] == Player.M)
+                    if (Map.Map[i, j] == -Player.id)
                     {
                         Player.X = j;
                         Player.Y = i;

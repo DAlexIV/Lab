@@ -20,15 +20,24 @@ namespace TmpServ
             for (int i = 0; i < pls.Count(); ++i)
                 SendEndingMessage(pls[i].IP);
         }
-        public void SendConnMes(IPEndPoint curip)
+        private void SendByte(IPEndPoint curip, byte b)
         {
-            byte[] tmp = { 0 };
+            byte[] tmp = { b };
             s.SendTo(tmp, curip);
         }
+        public void SendConnMes(IPEndPoint curip)
+        {
+            SendByte(curip, 0);
+        }
+
+
         public void SendEndingMessage(IPEndPoint curip)
         {
-            byte[] tmp = { 255 };
-            s.SendTo(tmp, curip);
+            SendByte(curip, 255);
+        }
+        public void SendNumbOfPlayers(IPEndPoint curip, int num)
+        {
+            SendByte(curip, (byte)num);
         }
         public void SendAll(ref MapServ cur, List<PlayerServ> pls)
         {

@@ -123,6 +123,7 @@ namespace TmpServ
                     byte[] strmes = listener.Receive(ref groupEP);
                     ConOut(strmes, groupEP);
                     AddPlayer(groupEP, mes, strmes);
+                    snd.SendNumbOfPlayers(new IPEndPoint(groupEP.Address, listenPort), pls.Count);
                     break;
                 case 2: //Move player
                     byte[] mes2 = listener.Receive(ref groupEP);

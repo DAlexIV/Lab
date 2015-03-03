@@ -20,7 +20,7 @@ namespace Client
                             {
                                 Console.SetCursorPosition(j, i + 2);
                                 Console.ResetColor();
-                                Console.Write(args.mp.players_signs[-args.mp.Map[i, j]]);
+                                Console.Write(args.mp.players_signs[-args.mp.Map[i, j] + 1]);
                             }
                             else
                             {
