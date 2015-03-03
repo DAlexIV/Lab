@@ -42,6 +42,7 @@ namespace TmpServ
              */
             state = 1;
             Netw cur_netw = new Netw(curm, port);
+            Console.WriteLine(cur_netw.myIP);
             Thread net_th = new Thread(cur_netw.Listen);
             net_th.Start();
 

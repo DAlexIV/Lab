@@ -18,6 +18,7 @@ namespace TmpServ
         List<int> isConnected = new List<int>();
         int listenPort;
         public Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        public string myIP;
         UdpClient listener;
 
         public Netw(MapServ cur, int port)
@@ -25,6 +26,21 @@ namespace TmpServ
             listenPort = port;
             this.cur = cur;
             listener = new UdpClient(port);
+            myIP = GetMyIP();
+        }
+        private string GetMyIP()
+        {
+            IPHostEntry host;
+            string localIP = "?";
+            host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily.ToString() == "InterNetwork")
+                {
+                    localIP = ip.ToString();
+                }
+            }
+            return localIP;
         }
         private string EpicOutPut(string mes)
         {
